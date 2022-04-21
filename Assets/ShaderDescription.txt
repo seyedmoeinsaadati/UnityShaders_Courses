@@ -1,0 +1,41 @@
+﻿struct Input
+{
+    float3 viewDir // - contains view direction, for computing Parallax effects, rim lighting etc.
+    float4 with COLOR semantic // - contains interpolated per-vertex color.
+    float4 screenPos // - contains screen space position for reflection or screenspace effects. Note that this is not suitable for GrabPass; you need to compute custom UV yourself using ComputeGrabScreenPos function.
+    float3 worldPos // - contains world space position.
+    float3 worldRefl // - contains world reflection vector if surface shader does not write to o.Normal. See Reflect-Diffuse shader for example.
+    float3 worldNormal // - contains world normal vector if surface shader does not write to o.Normal.
+    float3 worldRefl; INTERNAL_DATA // - contains world reflection vector if surface shader writes to o.Normal. 
+    // To get the reflection vector based on per-pixel normal map , use WorldReflectionVector (IN, o.Normal). See Reflect-Bumped shader for example.
+    float3 worldNormal; INTERNAL_DATA // - contains world normal vector if surface shader writes to o.Normal. To get the normal vector based on per-pixel normal map, use WorldNormalVector (IN, o.Normal).
+}
+struct SurfaceOutput
+{
+    fixed3 Albedo;      // diffuse color
+    fixed3 Normal;      // tangent space normal, if written
+    fixed3 Emission;
+    half Specular;      // specular power in 0..1 range
+    fixed Gloss;        // specular intensity
+    fixed Alpha;        // alpha for transparencies
+}
+struct SurfaceOutputStandard
+{
+    fixed3 Albedo;      // base (diffuse or specular) color
+    fixed3 Normal;      // tangent space normal, if written
+    half3 Emission;
+    half Metallic;      // 0=non-metal, 1=metal // ***
+    half Smoothness;    // 0=rough, 1=smooth
+    half Occlusion;     // occlusion (default 1)
+    fixed Alpha;        // alpha for transparencies
+};
+struct SurfaceOutputStandardSpecular
+{
+    fixed3 Albedo;      // diffuse color
+    fixed3 Specular;    // specular color
+    fixed3 Normal;      // tangent space normal, if written
+    half3 Emission;
+    half Smoothness;    // 0=rough, 1=smooth // ***
+    half Occlusion;     // occlusion (default 1)
+    fixed Alpha;        // alpha for transparencies
+};
