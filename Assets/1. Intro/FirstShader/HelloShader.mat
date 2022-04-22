@@ -21,6 +21,6 @@ Material:
     m_TexEnvs: []
     m_Floats: []
     m_Colors:
-    - _myColor: {r: 1, g: 0.5484462, b: 0.514151, a: 1}
-    - _myEmission: {r: 0.02352953, g: 0, b: 1, a: 1}
-    - _myNormal: {r: 0.9652157, g: 1, b: 0, a: 1}
+    - _myColor: {r: 1, g: 1, b: 1, a: 1}
+    - _myEmission: {r: 0.014650461, g: 0, b: 0.6226415, a: 1}
+    - _myNormal: {r: 0.754717, g: 0, b: 0.51703364, a: 1}
