@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: AllProp
   m_Shader: {fileID: 4800000, guid: 7b644b5a8ba765c40808f48694aeb613, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: _USEMAINTEX_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -65,25 +65,36 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
+    - _ColorWriteMask: 15
+    - _Cull: 2
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _Fancy: 0
+    - _FillWithRed: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _Invert: 0
     - _Metallic: 0
     - _Mode: 0
+    - _MyEnum: 1
     - _OcclusionStrength: 1
+    - _Overlay: 0
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Toggle: 0
     - _UVSec: 0
+    - _UseColor: 1
+    - _UseMainTex: 1
+    - _ZTest: 0
     - _ZWrite: 1
     - _myFloat: 0.5
-    - _myRange: 1.09
+    - _myRange: 1.7
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _myColor: {r: 1, g: 1, b: 1, a: 1}
+    - _myColor: {r: 0.6792453, g: 0.105731584, b: 0.105731584, a: 1}
     - _myVector: {r: 1, g: 1, b: 1, a: 1}
