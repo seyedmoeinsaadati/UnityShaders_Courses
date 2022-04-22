@@ -19,8 +19,11 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs: []
-    m_Floats: []
+    m_Floats:
+    - _myStripWidth: 1
     m_Colors:
-    - _myColor: {r: 1, g: 1, b: 1, a: 1}
-    - _myEmission: {r: 0.014650461, g: 0, b: 0.6226415, a: 1}
-    - _myNormal: {r: 0.754717, g: 0, b: 0.51703364, a: 1}
+    - _Color: {r: 1, g: 0, b: 0, a: 1}
+    - _myColor: {r: 0, g: 1, b: 0.08030319, a: 1}
+    - _myColour: {r: 1, g: 1, b: 1, a: 1}
+    - _myEmission: {r: 1, g: 0, b: 0.019001007, a: 1}
+    - _myNormal: {r: 1, g: 0.19339621, b: 0.20288591, a: 1}
