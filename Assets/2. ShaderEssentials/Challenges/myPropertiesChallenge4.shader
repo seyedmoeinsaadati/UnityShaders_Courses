@@ -1,32 +1,30 @@
 ﻿Shader "ShaderCourse/myPropertiesChallenge4"
 {
-    Properties
-    {
-        _myTex("2D Texture", 2D) = "white"{}
-        _myEmission("2D Emission", 2D) = "black"{}
-        _myNormal("2D Normal", 2D) = ""{}
+    Properties {
+        _albedoTex("Albedo Texture", 2D) = "white" {}
+        // _emissionTex("Emission Texture", 2D) = "white" {}
+        _emissionTex("Emission Texture", 2D) = "black" {}
     }
     SubShader
     {   
         CGPROGRAM
-        #pragma surface surf Lambert
+            #pragma surface surf Lambert
 
-        sampler2D _myTex;
-        sampler2D _myEmission;
-        sampler2D _myNormal;
+            sampler2D _albedoTex;
+            sampler2D _emissionTex;
 
-        struct Input {
-            float2 uv_myTex;
-            float2 uv_myEmission;
-            float2 uv_myNormal;
-        };
+            struct Input {
+                float2 uv_albedoTex;
+                float2 uv_emissionTex;
+            };
 
-        void surf (Input i, inout SurfaceOutput o){
-            o.Albedo = tex2D(_myTex, i.uv_myTex).rgb;
-            o.Normal = tex2D(_myNormal, i.uv_myNormal).rgb;
-            o.Emission = tex2D(_myEmission, i.uv_myEmission).rgb;
-        }
+            void surf(Input i, inout SurfaceOutput o){
+                o.Albedo = (tex2D(_albedoTex, i.uv_albedoTex)).rgb;
+                o.Emission = (tex2D(_emissionTex, i.uv_emissionTex)).rgb;
+            }
 
         ENDCG
     }
+
+    // Fallback "Diffuse"
 }

@@ -55,8 +55,20 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _albedoTex:
+        m_Texture: {fileID: 2800000, guid: 1565fb633afddfc48975d15136d878ad, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _emissionTex:
+        m_Texture: {fileID: 2800000, guid: 8f59a8194c7568443a454718893d71c7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _myCube:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _myEmis:
+        m_Texture: {fileID: 2800000, guid: 8f59a8194c7568443a454718893d71c7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _myEmission:
@@ -69,6 +81,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _myTex:
         m_Texture: {fileID: 2800000, guid: 1565fb633afddfc48975d15136d878ad, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - albedoTex:
+        m_Texture: {fileID: 2800000, guid: 1565fb633afddfc48975d15136d878ad, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - emissionTex:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
