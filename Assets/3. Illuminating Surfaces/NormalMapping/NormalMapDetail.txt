@@ -1,0 +1,9 @@
+Normal map as RGB Image:
+
+R:   0 to 255 	=map=> X: -1 to +1
+G:   0 to 255 	=map=> Y: -1 to +1
+R: 125 to 255 	=map=> Z: -1 to 0
+
+normal map vectors (per pixels) at pixel location:
+x, y values, lie vertical and horizontal acroos the screen
+positive z value going into the screen
