@@ -1,0 +1,8 @@
+
+Frame Buffer
+
+Z-Buffer = Depth-Buffer = D-Buffer
+holds depth information for each pixels
+
+
+Unity generally renders images (frame buffer) front-to-back
