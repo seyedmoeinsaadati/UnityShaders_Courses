@@ -72,7 +72,7 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
-    - _mySliderX: 0
+    - _mySliderX: 1
     - _mySliderY: 1
     - _mySliderZ: 1
     m_Colors:

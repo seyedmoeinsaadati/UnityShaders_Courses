@@ -15,6 +15,7 @@ public class ShowNormals : MonoBehaviour
 
     //to display length
     public float normal_length;
+    public float normal_scale = 1;
 
     // Update is called once per frame
     void Update()
@@ -44,7 +45,7 @@ public class ShowNormals : MonoBehaviour
             Debug.DrawLine
             (
                 posRot,
-                posRot + normals[i] /2, Color.white);
+                posRot + normals[i] / 2 * normal_scale, Color.white);
         }
     }
 }
