@@ -1,4 +1,4 @@
-﻿Shader "ShaderCourse/BufferQueueShader" {
+﻿Shader "Moein/ZWriteSwitcher" {
 
     Properties {
         _myDiffuse ("Diffuse Texture", Color ) = (1,1,1,1)
@@ -6,7 +6,6 @@
     }
 
     SubShader {
-        Tags{ "Queue"="Geometry+100"}
         ZWrite [_ZWrite]
         CGPROGRAM
         #pragma surface surf Lambert

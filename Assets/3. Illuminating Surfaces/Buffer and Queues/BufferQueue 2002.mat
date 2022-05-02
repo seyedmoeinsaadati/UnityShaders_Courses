@@ -83,7 +83,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _ZWrite: 1
+    - _ZWrite: 0
     - _myBright: 0
     - _mySlider: 0
     m_Colors:
