@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DotProduct
-  m_Shader: {fileID: 4800000, guid: 72f1c9af19f517c4494c6c64a1a503d1, type: 3}
+  m_Name: RimLighting
+  m_Shader: {fileID: 4800000, guid: 5a301e3d15e93a243825884bdc479381, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -67,6 +67,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _RimPower: 7.95
     - _Slider: 3.28
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -76,3 +77,4 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _RimColor: {r: 136.18861, g: 145.31857, b: 0, a: 1}
