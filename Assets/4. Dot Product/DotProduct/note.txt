@@ -1,0 +1,10 @@
+DotProduct:
+A.B = |A|*|B|*Cos(angle);
+A.B = A.x * B.x + A.y * B.y + A.z * B.z;
+
+half dotValue = dot(A, B);
+
+if length(A or B) == 1:
+A.B = 1     => A and B is pararell and same direction
+A.B = -1    => A and B is pararell and oposite direction
+A.B = 0     => A and B is perpendicular

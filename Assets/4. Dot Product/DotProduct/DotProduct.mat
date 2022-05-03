@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mat_DOtProduct
-  m_Shader: {fileID: 4800000, guid: 8f364f05ec0e96e4191ae2e37716f58c, type: 3}
+  m_Name: DotProduct
+  m_Shader: {fileID: 4800000, guid: 72f1c9af19f517c4494c6c64a1a503d1, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -55,18 +55,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _myBump:
-        m_Texture: {fileID: 2800000, guid: f23e8bdebe391ab47822cb7522fc3357, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _myCube:
-        m_Texture: {fileID: 8900000, guid: a473716e2bd224742b73e68aeff0ae70, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _myDiffuse:
-        m_Texture: {fileID: 2800000, guid: 40a5063ea9c7b614b89c12edb49b43ed, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -84,8 +72,6 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
-    - _myBright: 4.6
-    - _mySlider: -1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
