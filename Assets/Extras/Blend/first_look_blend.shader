@@ -4,6 +4,9 @@ Shader "TutorialShaders/FirstLookBlend"
 
           _mainTex("Texture", 2D) = "black"{}
 
+        [Enum(UnityEngine.Rendering.BlendOp)]
+        _BlendOp("Blending Operation", Float) = 1
+
         [Enum(UnityEngine.Rendering.BlendMode)]
         _SrcBlend("Soruce Factor", Float) = 1
 
@@ -14,6 +17,7 @@ Shader "TutorialShaders/FirstLookBlend"
     SubShader{
         Tags {"Queue"= "Transparent" "RenderType" = "Transparent"}
         Blend [_SrcBlend] [_DstBlend]
+        BlendOp [_BlendOp]
 
         Pass
         {
