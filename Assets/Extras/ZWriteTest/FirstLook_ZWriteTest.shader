@@ -9,14 +9,14 @@ Shader "TutorialShaders/FirstLookZWriteTest"
     }
 
     SubShader{
-        Tags {}
+        Tags {"RenderType" = "Opaque"}
         ZWrite [_ZWrite]
         ZTest [_ZTest]
         
         Pass
         {
             SetTexture[_mainTex] { Combine texture}
-        }    
+        }
     }
     FallBack "Diffuse"
 }
