@@ -1,13 +1,9 @@
-﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-// Upgrade NOTE: replaced '' with 'UnityObjectToClipPos(*)'
-
-Shader "Moein/Unlit/ShowDepth"
+﻿Shader "Moein/Unlit/ShowDepth"
 {
     Properties
     {
         [Toggle]
-        _Reverse ("Reverse", Float) = 0
+        _Reverse ("Reverse Z", Float) = 0
     }
     SubShader
     {
@@ -36,9 +32,7 @@ Shader "Moein/Unlit/ShowDepth"
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                float k = length(UnityObjectToViewPos(v.vertex));
-                
-                o.depth = k;
+                o.depth = length(UnityObjectToViewPos(v.vertex));
                 return o;
             }
             
