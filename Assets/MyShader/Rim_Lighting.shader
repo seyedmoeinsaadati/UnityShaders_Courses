@@ -1,4 +1,4 @@
-Shader"Moein/RimLighting"{
+Shader"Moein/Standard/Rim_Lighting"{
     Properties{
         [HDR]
         _RimColor ("Rim Color", Color) = (1,1,1,1)

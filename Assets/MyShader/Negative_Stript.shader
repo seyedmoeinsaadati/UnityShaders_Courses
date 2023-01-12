@@ -1,4 +1,4 @@
-﻿Shader "Custom/NegativeStripts"
+﻿Shader "Moein/Standard/Negative_Stript"
 {
     Properties
     {
