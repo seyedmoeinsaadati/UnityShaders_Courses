@@ -21,6 +21,7 @@
             #pragma fragment frag
             
             #include "UnityCG.cginc"
+            #include "Assets/MyShader/utils.cginc"
 
             struct appdata
             {
@@ -43,15 +44,10 @@
             float _NormalFactor;
             float _Speed;
                        
-            float random (float2 uv)
-            {
-                return frac(sin(dot(uv,float2(12.9898,78.233)))*43758.5453123);
-            }
 
             v2f vert (appdata v)
             {
                 v2f o;
-
                 float vertexRandPos = random(v.vertex.xz);
                 v.vertex.y = clamp(vertexRandPos * _CosTime.x, 0, _Amplitude);
                 v.vertex.x += vertexRandPos * _SinTime.z * _Speed /10;
