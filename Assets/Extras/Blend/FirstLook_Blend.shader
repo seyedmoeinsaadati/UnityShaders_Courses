@@ -7,6 +7,7 @@ Shader "TutorialShaders/FirstLookBlend"
         [Enum(UnityEngine.Rendering.BlendOp)]
         _BlendOp("Blending Operation", Float) = 1
 
+        [Header(Blending)]
         [Enum(UnityEngine.Rendering.BlendMode)]
         _SrcBlend("Soruce Factor", Float) = 1
 
