@@ -46,9 +46,13 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
-                i.uv *= 3;
                 float2 fuv = frac(i.uv);
-                fixed4 col = tex2D(_MainTex, fuv);
+                // generate the circle
+                float circle = length(fuv - 0.5);
+                // flip the colors and return an integer value
+                float wCircle = floor(_Size / circle);
+
+                fixed4 col = tex2D(_MainTex, fuv) * wCircle;
                 return col;
             }
             ENDCG
