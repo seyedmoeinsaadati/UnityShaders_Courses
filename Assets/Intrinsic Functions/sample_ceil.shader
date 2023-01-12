@@ -1,4 +1,4 @@
-﻿Shader "Unlit/Sample_ABS"
+﻿Shader "Unlit/sample_ceil"
 {
     Properties
     {
