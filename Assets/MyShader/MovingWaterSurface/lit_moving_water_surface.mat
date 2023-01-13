@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: moving_water_surface
-  m_Shader: {fileID: 4800000, guid: bad2763299ae97c4886f308f45f78224, type: 3}
+  m_Name: lit_moving_water_surface
+  m_Shader: {fileID: 4800000, guid: e7aa15325a7e6824cac66d2fae5f3643, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -30,11 +30,11 @@ Material:
     m_Floats:
     - _Amplitude: 0.5
     - _Center: 0.5
-    - _MovingSpeedX: 3
-    - _MovingSpeedZ: 2
+    - _MovingSpeedX: 1
+    - _MovingSpeedZ: 1
     - _NormalFactor: 0
-    - _Radius: 0.113
-    - _Smooth: 0.375
-    - _WavePower: 1.54
+    - _Radius: 0.156
+    - _Smooth: 0.237
+    - _WavePower: 1.16
     m_Colors:
-    - _Color: {r: 0.17621933, g: 0.5079963, b: 0.8301887, a: 1}
+    - _Color: {r: 0.18396229, g: 0.59931076, b: 1, a: 1}

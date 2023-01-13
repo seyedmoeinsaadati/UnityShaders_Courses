@@ -1,4 +1,4 @@
-﻿Shader "Moein/Unlit/Surface_Wave"
+﻿Shader "Moein/VertexLit/Simple_Surface_Wave"
 {
     // SinCos   (t/8 , t/4, t/2, t  )
     // time     (t/20, t  , t*2, t*3)
@@ -15,12 +15,12 @@
         _Radius ("Radius", Range(0.0, 0.5)) = 0.3
         _MovingSpeedX("Moving Speed X", Float) = 0
         _MovingSpeedZ("Moving Spedd Y", Float) = 0
-       
         
     }
     SubShader
     {
-        Tags {"RenderType"="Opaque"}
+        Tags {"RenderType"="Opaque" "LightMode"="ForwardBase"}
+
         
         Pass
         {
@@ -29,7 +29,9 @@
             #pragma fragment frag
             
             #include "UnityCG.cginc"
+            #include "UnityLightingCommon.cginc" 
             #include "Assets/MyShader/utils.cginc"
+
 
             struct appdata
             {
@@ -42,6 +44,7 @@
             {
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
+                fixed4 diff : COLOR0; 
             };
 
             float4 _Color;
@@ -61,24 +64,25 @@
                 v.uv.x += _MovingSpeedX * _Time.x;
                 v.uv.y += _MovingSpeedZ * _Time.x;
                 float vertexrandpos = random(v.vertex.xz);
-                float c = circle(frac(v.uv), .5 , _Radius, _Smooth) * _WavePower;
-                v.vertex.y = (c) + clamp(vertexrandpos * abs(_SinTime.x), 0, 1) * _Amplitude;
+                float waveWeight = circle(frac(v.uv), .5 , _Radius, _Smooth) * _WavePower;
+                v.vertex.y = waveWeight + vertexrandpos * _Amplitude;
                 v.vertex.x += vertexrandpos * _SinTime.z / 10;
                 v.vertex.z += vertexrandpos * _SinTime.z / 10;
                 o.vertex = UnityObjectToClipPos(v.vertex);  
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+
+                // lighting
+                half3 worldNormal = UnityObjectToWorldNormal(v.normal);
+                half nl = max(0, dot(worldNormal, _WorldSpaceLightPos0.xyz));
+                o.diff = nl * _LightColor0;
 
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-                //fixed4 col = tex2D(_WaveTex, i.uv) * _Color;
-                //return col;
-
-                // debug mode: return noise map
-                float c = circle(frac(i.uv), .5, _Radius, _Smooth);
-                return fixed4(c.xxx, 1) * _Color;
+                fixed4 col = tex2D(_MainTex, i.uv) * _Color;
+                return col * i.diff;
             }
             ENDCG
         }
