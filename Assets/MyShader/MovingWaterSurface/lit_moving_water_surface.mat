@@ -30,11 +30,11 @@ Material:
     m_Floats:
     - _Amplitude: 0.2
     - _Center: 0.5
-    - _MovingSpeedX: -3
+    - _MovingSpeedX: 3
     - _MovingSpeedZ: 1
     - _NormalFactor: 0
-    - _Radius: 0.156
-    - _Smooth: 0.281
+    - _Radius: 0.16
+    - _Smooth: 0.19
     - _WavePower: 1.08
     m_Colors:
     - _Color: {r: 0.023584902, g: 0.70144767, b: 1, a: 1}
