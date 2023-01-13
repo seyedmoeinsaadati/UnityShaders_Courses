@@ -20,8 +20,8 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
-    - _Gloss: 0.291
-    - _Spec: 0.359
+    - _Gloss: 1
+    - _Spec: 0.13
     m_Colors:
     - _Color: {r: 1, g: 0.051886797, b: 0.051886797, a: 1}
     - _SpecColor: {r: 0.8773585, g: 0.8653351, b: 0.864943, a: 1}

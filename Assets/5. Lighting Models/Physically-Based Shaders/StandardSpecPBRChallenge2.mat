@@ -29,8 +29,8 @@ Material:
     - _Roughness: 2
     - _Spec: 0.359
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _SpecColor: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 1}
+    - _Color: {r: 1, g: 0, b: 0, a: 1}
+    - _SpecColor: {r: 0.9804748, g: 1, b: 0.43867922, a: 1}
     - _myColor: {r: 1, g: 0.5484462, b: 0.514151, a: 1}
     - _myEmission: {r: 0.02352953, g: 0, b: 1, a: 1}
     - _myNormal: {r: 0.9652157, g: 1, b: 0, a: 1}

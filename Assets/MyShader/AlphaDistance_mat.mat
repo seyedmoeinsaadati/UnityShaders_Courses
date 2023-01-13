@@ -69,7 +69,7 @@ Material:
     - _BlendOp: 0
     - _BlendSrc: 0
     - _BumpScale: 1
-    - _CameraOffset: 10
+    - _CameraOffset: 6.37
     - _ColorMask: 15
     - _ColorStrength: 1
     - _Cull: 2

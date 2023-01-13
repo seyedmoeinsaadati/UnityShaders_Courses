@@ -21,16 +21,17 @@
     {
         Tags {"RenderType"="Opaque" "LightMode"="ForwardBase"}
 
-        
         Pass
         {
             CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
             
             #include "UnityCG.cginc"
             #include "UnityLightingCommon.cginc" 
             #include "Assets/MyShader/utils.cginc"
+
+            #pragma vertex vert
+            #pragma geometry geom
+            #pragma fragment frag
 
 
             struct appdata
@@ -40,11 +41,18 @@
                 float2 uv : TEXCOORD0;
             };
 
-            struct v2f
+            struct v2g
             {
+                float4 pos : SV_POSITION;
                 float2 uv : TEXCOORD0;
-                float4 vertex : SV_POSITION;
-                fixed4 diff : COLOR0; 
+                float3 vertex : TEXCOORD1;
+            };
+
+            struct g2f
+            {
+                float4 pos : SV_POSITION;
+                float2 uv : TEXCOORD0;
+                float light : TEXCOORD1;
             };
 
             float4 _Color;
@@ -58,9 +66,9 @@
             float _Smooth;
             float _Radius;
 
-            v2f vert (appdata v)
+            v2g vert (appdata v)
             {
-                v2f o;
+                v2g o;
                 v.uv.x += _MovingSpeedX * _Time.x;
                 v.uv.y += _MovingSpeedZ * _Time.x;
                 float vertexrandpos = random(v.vertex.xz);
@@ -68,22 +76,45 @@
                 v.vertex.y = waveWeight + vertexrandpos * _Amplitude;
                 v.vertex.x += vertexrandpos * _SinTime.z / 10;
                 v.vertex.z += vertexrandpos * _SinTime.z / 10;
-                o.vertex = UnityObjectToClipPos(v.vertex);  
+                o.pos = UnityObjectToClipPos(v.vertex);
+                o.vertex = v.vertex;
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-
-                // lighting
-                half3 worldNormal = UnityObjectToWorldNormal(v.normal);
-                half nl = max(0, dot(worldNormal, _WorldSpaceLightPos0.xyz));
-                o.diff = nl * _LightColor0;
 
                 return o;
             }
 
-            fixed4 frag (v2f i) : SV_Target
+            [maxvertexcount(3)]
+            void geom(triangle v2g IN[3], inout TriangleStream<g2f> triStream)
             {
-                fixed4 col = tex2D(_MainTex, i.uv) * _Color;
-                return col * i.diff;
+                g2f o;
+
+                // Compute the normal
+                float3 vecA = IN[1].vertex - IN[0].vertex;
+                float3 vecB = IN[2].vertex - IN[0].vertex;
+                float3 normal = cross(vecA, vecB);
+                normal = normalize(mul(normal, (float3x3) unity_WorldToObject));
+
+                // Compute diffuse light
+                float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);
+                o.light = max(0., dot(normal, lightDir)) * _LightColor0;
+
+                // Compute barycentric uv
+                o.uv = (IN[0].uv + IN[1].uv + IN[2].uv) / 3;
+
+                for(int i = 0; i < 3; i++)
+                {
+                    o.pos = IN[i].pos;
+                    triStream.Append(o);
+                }
             }
+
+             half4 frag(g2f i) : COLOR
+            {
+                float4 col = tex2D(_MainTex, i.uv);
+                col.rgb *= i.light * _Color;
+                return col;
+            }
+
             ENDCG
         }
     }
