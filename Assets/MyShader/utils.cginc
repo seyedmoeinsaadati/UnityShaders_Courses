@@ -17,3 +17,9 @@ void rotate(float2 UV, float2 center, float angle,out float2 Out)
     UV += center;
     Out = UV;
 }
+
+float circle (float2 p, float center, float radius, float smooth)
+{
+    float c = length(p - center) - radius;
+    return smoothstep(c - smooth, c + smooth, radius);
+}
