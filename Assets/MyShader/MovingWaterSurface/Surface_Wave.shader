@@ -4,11 +4,9 @@
     // time     (t/20, t  , t*2, t*3)
     Properties
     {
+        _MainTex("Main Texture", 2D) = "white"{}
         _Color ("Color", Color) = (1,1,1,1)
-
         _Amplitude("Amplitude", Float) = 1
-
-        _WaveTex("Wave Texture", 2D) = "white"{}
 
         [Header(Wave Fields)]
         [Space]
@@ -49,8 +47,8 @@
             float4 _Color;
             float _Amplitude;
 
-            sampler2D _WaveTex;
-            float4 _WaveTex_ST;
+            sampler2D _MainTex;
+            float4 _MainTex_ST;
             float _WavePower;
             float _MovingSpeedX;
             float _MovingSpeedZ;
@@ -68,7 +66,7 @@
                 v.vertex.x += vertexrandpos * _SinTime.z / 10;
                 v.vertex.z += vertexrandpos * _SinTime.z / 10;
                 o.vertex = UnityObjectToClipPos(v.vertex);  
-                o.uv = TRANSFORM_TEX(v.uv, _WaveTex);
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 
                 return o;
             }
