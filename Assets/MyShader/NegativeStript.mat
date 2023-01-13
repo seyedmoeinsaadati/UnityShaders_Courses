@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: NegativeStript
-  m_Shader: {fileID: 4800000, guid: 66f0d6a533f0c6c42b943d1f1ac428fb, type: 3}
+  m_Shader: {fileID: 4800000, guid: 0a8ceb2627ce2314898c9272fd30eccc, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
