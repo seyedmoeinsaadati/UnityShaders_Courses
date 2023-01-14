@@ -15,6 +15,10 @@
         _Radius ("Radius", Range(0.0, 0.5)) = 0.3
         _MovingSpeedX("Moving Speed X", Float) = 0
         _MovingSpeedZ("Moving Spedd Y", Float) = 0
+
+        //[Header(Lighting)]
+        //_CustomLightColor ("Lighting Color", Color) = (1,1,1)
+        //_CustomLightDir("Lighting Direction", Vector) = (1,1,1)
         
     }
     SubShader
@@ -32,7 +36,6 @@
             #pragma vertex vert
             #pragma geometry geom
             #pragma fragment frag
-
 
             struct appdata
             {
@@ -52,7 +55,7 @@
             {
                 float4 pos : SV_POSITION;
                 float2 uv : TEXCOORD0;
-                float light : TEXCOORD1;
+                float3 light : TEXCOORD1;
             };
 
             float4 _Color;
@@ -65,6 +68,9 @@
             float _MovingSpeedZ;
             float _Smooth;
             float _Radius;
+
+            float3 _CustomLightColor;
+            float4 _CustomLightDir;
 
             v2g vert (appdata v)
             {
@@ -96,7 +102,10 @@
 
                 // Compute diffuse light
                 float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);
-                o.light = max(0., dot(normal, lightDir)) * _LightColor0;
+                o.light = _LightColor0 * max(0., dot(normal, lightDir));
+
+                // custom lighting ????
+                o.light += max(0., dot(normal, (0,0,.1)));
 
                 // Compute barycentric uv
                 o.uv = (IN[0].uv + IN[1].uv + IN[2].uv) / 3;
