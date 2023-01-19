@@ -2,30 +2,25 @@
 {
     Properties
     {
+        _Color("Color", Color) = (1,1,1)
         _MainTex("Main Text", 2D) = "black"{}
-        _CameraOffset("Cmaera Offset", Float) = 1
+        _CameraOffset("Camera Min", Float) = 1
 
         [Enum(ON, 1, OFF, 0)]
-        _ZWrite("Z Write", Float)  = 1
+        _ZWrite("Z Write", Float)  = 0
         [KeywordEnum(Less, Less, Greater,Greater,LEqual,LEqual,GEqual,GEqual,Equal,Equal,NotEqual,NotEqual,Always,Always)]
         _ZTest("Z Test", Int)  = 1
-        [Header(Blending)]
-        [Enum(UnityEngine.Rendering.BlendOp)]
-        _BlendOp("Blending Operation", Float) = 1
-        [Enum(UnityEngine.Rendering.BlendMode)]
-        _SrcBlend("Soruce Factor", Float) = 1
-        [Enum(UnityEngine.Rendering.BlendMode)]
-        _DstBlend("Destination Factor", Float) = 1
     }
     SubShader
     {
         Tags { "RenderType" = "Transparent" "Queue"= "Transparent"}
 
-
         ZWrite [_ZWrite]
         ZTest [_ZTest]
-        Blend [_SrcBlend] [_DstBlend]
-        BlendOp [_BlendOp]
+        Blend SrcAlpha OneMinusSrcAlpha
+        
+
+        // BlendOp [_BlendOp]
 
         Pass
         {
@@ -50,6 +45,7 @@
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
+            float4 _Color;
             float _CameraOffset;
 
             v2f vert (appdata v)
@@ -63,8 +59,8 @@
             
             fixed4 frag (v2f i) : SV_TARGET
             {
-                fixed4 col = tex2D(_MainTex, i.uv);
-                col.a = 1-lerp(0, 1, i.depth / _CameraOffset);
+                fixed4 col = tex2D(_MainTex, i.uv) * _Color;
+                col.a = clamp(i.depth - _CameraOffset, 0, 1);
                 return col;
             }
             ENDCG
