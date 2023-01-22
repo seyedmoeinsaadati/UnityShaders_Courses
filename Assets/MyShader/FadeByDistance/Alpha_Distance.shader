@@ -10,7 +10,7 @@
         [Enum(ON, 1, OFF, 0)]
         _ZWrite("Z Write", Float)  = 0
         [KeywordEnum(Less, Less, Greater,Greater,LEqual,LEqual,GEqual,GEqual,Equal,Equal,NotEqual,NotEqual,Always,Always)]
-        _ZTest("Z Test", Int)  = 1
+        _ZTest("Z Test", Int)  = 2
     }
     SubShader
     {
