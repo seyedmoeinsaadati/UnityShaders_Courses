@@ -73,7 +73,8 @@ Material:
     - _BlendOp: 0
     - _BlendSrc: 0
     - _BumpScale: 1
-    - _CameraOffset: 3
+    - _CameraClosness: 0
+    - _CameraOffset: 200
     - _ColorMask: 15
     - _ColorStrength: 1
     - _Cull: 2
@@ -95,6 +96,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 10
+    - _Stickness: 1
     - _UVSec: 0
     - _ZAccuracy: 10
     - _ZTest: 4
@@ -103,5 +105,5 @@ Material:
     - _myStripWidth: 1
     m_Colors:
     - _AddColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
