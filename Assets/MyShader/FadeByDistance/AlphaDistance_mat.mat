@@ -48,7 +48,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: fff48969e5bc54542a1655d07ca46f9b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3c105a0fe0638074f81b82079b1caa12, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -93,7 +93,7 @@ Material:
     - _Parallax: 0.02
     - _Reverse: 1
     - _ShadowCull: 2
-    - _Smoothness: 0.47
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 10
@@ -101,7 +101,7 @@ Material:
     - _UVSec: 0
     - _ZAccuracy: 10
     - _ZTest: 4
-    - _ZWrite: 0
+    - _ZWrite: 1
     - _mySlider: 2.31
     - _myStripWidth: 1
     m_Colors:

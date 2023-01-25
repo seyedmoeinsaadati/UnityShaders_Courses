@@ -18,7 +18,7 @@
 
         ZWrite [_ZWrite]
         ZTest [_ZTest]
-        Blend SrcAlpha OneMinusSrcAlpha
+        Blend SrcAlpha OneMinusSrcAlpha 
 
         Pass
         {
