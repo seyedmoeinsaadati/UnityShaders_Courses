@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: three_color_lighing
   m_Shader: {fileID: 4800000, guid: 94a7c70d56cde424e80ea1da5dce4822, type: 3}
-  m_ShaderKeywords: _ADDITIONALTILE_NONE _REVERSE_ON
+  m_ShaderKeywords: _ADDITIONALTILE_NONE _AMBIENT_ON _REVERSE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -24,8 +24,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Ambient: 0
-    - _AmbientInt: 1
+    - _Ambient: 1
+    - _AmbientInt: 0.803
     - _LightInt: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
