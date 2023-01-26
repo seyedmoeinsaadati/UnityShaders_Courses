@@ -5,11 +5,16 @@
         _Color("Color", Color) = (1,1,1)
         _MainTex("Main Text", 2D) = "white"{}
 
+        [Space(10)]
         _LightInt("Lighting Intensity", Range(0, 1)) = 1
-        [HDR]_LightColorX("Light Color X", Color) = (1,1,1,1)
-        [HDR]_LightColorY("Light Color Y", Color) = (1,1,1,1)
-        [HDR]_LightColorZ("Light Color Z", Color) = (1,1,1,1)
+        [HDR]
+        _LightColorX("Light Color X", Color) = (1,1,1,1)
+        [HDR]
+        _LightColorY("Light Color Y", Color) = (1,1,1,1)
+        [HDR]
+        _LightColorZ("Light Color Z", Color) = (1,1,1,1)
 
+        [Space(10)]
         [Toggle]
         _Ambient ("Global Ambient", Float) = 0
         _AmbientInt("Ambient Intensity", Range(0, 1)) = 1
