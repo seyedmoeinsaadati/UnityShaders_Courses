@@ -43,14 +43,23 @@
 			float4 _BumpMap_ST;
 			float _ScaleUV;
 
+			float circle (float2 p, float center, float radius, float smooth)
+            {
+                float c = length(p - center) - radius;
+                return smoothstep(c - smooth, c + smooth, radius);
+            }
+
             v2f vert(appdata v) {
+				 
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uvGrab = ComputeGrabScreenPos(o.vertex);
 				o.uv = TRANSFORM_TEX(v.uv,_MainTex);
 				o.uvBump = TRANSFORM_TEX(v.uv,_BumpMap);
 
-				// o.uvGrab.y = sin( _SinTime.z);
+				float waveWeight = circle(frac(o.uvGrab), .5 , .5, 1);
+
+				o.uvGrab.xy = frac(sin(o.uvGrab.xy * waveWeight)) ;
 
 				o.uvGrab.xy = _ScaleUV * o.uvGrab.z + o.uvGrab.xy;
                 return o;
