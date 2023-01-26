@@ -1,4 +1,4 @@
-﻿Shader "Unlit/First_Normal_Map"
+﻿Shader "TutorialShaders/First_Normal_Map"
 {
 
     // normal map:
