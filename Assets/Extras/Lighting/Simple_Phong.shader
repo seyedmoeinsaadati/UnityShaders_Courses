@@ -83,7 +83,7 @@
 
                 float3 viewDir = normalize(_WorldSpaceCameraPos - i.worldVertex);
                 fixed3 specCol = _SpecularColor * _LightColor0.rgb;
-                half3 specular = SpecularShading(specCol, _SpecularColor.a, i.worldNormal, viewDir, lightDir, _SpecularPow);
+                half3 specular = SpecularShading(specCol, _SpecularColor.a, i.worldNormal, lightDir, viewDir, _SpecularPow);
                 col.rgb += specular;
                 
                 return col;
