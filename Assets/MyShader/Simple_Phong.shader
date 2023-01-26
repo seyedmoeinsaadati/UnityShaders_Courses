@@ -34,8 +34,7 @@
             {
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
-                float3 worldNormal : TEXCOORD1;
-                float3 worldVertex : TEXCOORD2;
+                float4 color : COLOR;
             };
 
             float4 _Color;
@@ -64,8 +63,18 @@
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                o.worldNormal = UnityObjectToWorldNormal(v.normal);
-                o.worldVertex = normalize(mul(unity_ObjectToWorld, v.vertex)).xyz;
+                float3 worldNormal = UnityObjectToWorldNormal(v.normal);
+            
+                o.color.rgb = UNITY_LIGHTMODEL_AMBIENT * _Ambient;;
+
+                float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);
+                half3 diffuse = LambertShading(_LightColor0.rgb, _LightInt, worldNormal, lightDir);
+                o.color.rgb *= diffuse;
+                
+                float3 viewDir = normalize(WorldSpaceViewDir(v.vertex)).xyz;
+                fixed3 specCol = _SpecularColor * _LightColor0.rgb;
+                half3 specular = SpecularShading(specCol, _SpecularColor.a, worldNormal, lightDir, viewDir, _SpecularPow);
+                o.color.rgb += specular;
                 
                 return o;
             }
@@ -73,20 +82,7 @@
             fixed4 frag (v2f i) : SV_Target
             {
                 fixed4 col = tex2D(_MainTex, i.uv) * _Color;
-
-                float3 ambinent_color = UNITY_LIGHTMODEL_AMBIENT * _Ambient;
-                col.rgb += ambinent_color;
-
-                float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);
-                half3 diffuse = LambertShading(_LightColor0.rgb, _LightInt, i.worldNormal, lightDir);
-                col.rgb *= diffuse;
-
-                
-                float3 viewDir = UnityWorldSpaceViewDir(i.worldVertex);
-                fixed3 specCol = _SpecularColor * _LightColor0.rgb;
-                half3 specular = SpecularShading(specCol, _SpecularColor.a, i.worldNormal, lightDir, viewDir, _SpecularPow);
-                col.rgb += specular;
-                
+                col.rgb += i.color;
                 return col;
             }
             ENDCG
