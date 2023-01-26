@@ -35,7 +35,7 @@
             float4 _MainTex_ST;
             float _LightInt;
 
-            float3 LambertShading(float3 colorRefl, float lightInt, float3 normal, float3 lightDir)
+            float3 lambert_shading(float3 colorRefl, float lightInt, float3 normal, float3 lightDir)
             {
                 return colorRefl * lightInt * max(0, dot(normal, lightDir));
             }
@@ -55,9 +55,9 @@
                 fixed4 col = tex2D(_MainTex, i.uv);
                 fixed3 lightCol = _LightColor0.rgb;
                 float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);
-                half3 diffuse = LambertShading(lightCol, _LightInt, i.worldNormal, lightDir);
+                half3 diffuse = lambert_shading(lightCol, _LightInt, i.worldNormal, lightDir);
                 col.rgb *= diffuse;
-                return col ;
+                return col;
             }
             ENDCG
         }

@@ -42,7 +42,7 @@
             float _SpecularInt;
             float _SpecularPow;
 
-            float3 SpecularShading(float3 colorRefl, float specularInt, float3 normal, float3 lightDir, float3 viewDir, float specularPow)
+            float3 specular_shading(float3 colorRefl, float specularInt, float3 normal, float3 lightDir, float3 viewDir, float specularPow)
             {
                 float3 h = normalize(lightDir + viewDir);
                 return colorRefl * specularInt * pow(max (0 , dot(normal, h)), specularPow);
@@ -66,7 +66,7 @@
                 float3 viewDir = normalize(_WorldSpaceCameraPos - i.worldVertex);
                 float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);
                 fixed3 specCol = tex2D(_SpecularTex, i.uv) * _LightColor0.rgb;
-                half3 specular = SpecularShading(specCol, _SpecularInt, i.worldNormal, lightDir, viewDir, _SpecularPow);
+                half3 specular = specular_shading(specCol, _SpecularInt, i.worldNormal, lightDir, viewDir, _SpecularPow);
                 col.rgb += specular;
                 return col ;
             }

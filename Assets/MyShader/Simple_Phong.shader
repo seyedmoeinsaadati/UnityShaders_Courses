@@ -47,12 +47,12 @@
             float _SpecularPow;
 
 
-            float3 LambertShading(float3 colorRefl, float lightInt, float3 normal, float3 lightDir)
+            float3 lambert_shading(float3 colorRefl, float lightInt, float3 normal, float3 lightDir)
             {
                 return colorRefl * lightInt * max(0, dot(normal, lightDir));
             }
 
-            float3 SpecularShading(float3 colorRefl, float specularInt, float3 normal, float3 lightDir, float3 viewDir, float specularPow)
+            float3 specular_shading(float3 colorRefl, float specularInt, float3 normal, float3 lightDir, float3 viewDir, float specularPow)
             {
                 float3 h = normalize(lightDir + viewDir);
                 return colorRefl * specularInt * pow(max (0 , dot(normal, h)), specularPow);
@@ -68,12 +68,12 @@
                 o.color.rgb = UNITY_LIGHTMODEL_AMBIENT * _Ambient;;
 
                 float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);
-                half3 diffuse = LambertShading(_LightColor0.rgb, _LightInt, worldNormal, lightDir);
+                half3 diffuse = lambert_shading(_LightColor0.rgb, _LightInt, worldNormal, lightDir);
                 o.color.rgb *= diffuse;
                 
                 float3 viewDir = normalize(WorldSpaceViewDir(v.vertex)).xyz;
                 fixed3 specCol = _SpecularColor * _LightColor0.rgb;
-                half3 specular = SpecularShading(specCol, _SpecularColor.a, worldNormal, lightDir, viewDir, _SpecularPow);
+                half3 specular = specular_shading(specCol, _SpecularColor.a, worldNormal, lightDir, viewDir, _SpecularPow);
                 o.color.rgb += specular;
                 
                 return o;
