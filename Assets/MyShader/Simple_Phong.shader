@@ -1,4 +1,4 @@
-﻿Shader "TutorialShaders/Simple_Phong"
+﻿Shader "Moein/Simple_Phong"
 {
     Properties
     {
@@ -81,7 +81,8 @@
                 half3 diffuse = LambertShading(_LightColor0.rgb, _LightInt, i.worldNormal, lightDir);
                 col.rgb *= diffuse;
 
-                float3 viewDir = normalize(_WorldSpaceCameraPos - i.worldVertex);
+                
+                float3 viewDir = UnityWorldSpaceViewDir(i.worldVertex);
                 fixed3 specCol = _SpecularColor * _LightColor0.rgb;
                 half3 specular = SpecularShading(specCol, _SpecularColor.a, i.worldNormal, lightDir, viewDir, _SpecularPow);
                 col.rgb += specular;
