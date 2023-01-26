@@ -7,7 +7,7 @@
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags { "RenderType"="Opaque" "LightMode"="ForwardBase"}
 
         Pass
         {
@@ -15,19 +15,20 @@
             #pragma vertex vert
             #pragma fragment frag
             #include "UnityCG.cginc"
-
-            
+            #include "UnityLightingCommon.cginc"
 
             struct appdata
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
+                float3 normal: NORMAL;
             };
 
             struct v2f
             {
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
+                float3 worldNormal : TEXCOORD1;
             };
 
             sampler2D _MainTex;
@@ -44,18 +45,19 @@
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.worldNormal = normalize(mul(unity_ObjectToWorld, float4(v.normal, 0))).xyz;
+                
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-                // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv);
-                fixed3 colorRefl = _LightColor0.rgb;
+                fixed3 lightCol = _LightColor0.rgb;
                 float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);
-                half3 diffuse = LambertShading(colorRefl, _LightInt, 0 , lightDir);
-
-                return col;
+                half3 diffuse = LambertShading(lightCol, _LightInt, i.worldNormal, lightDir);
+                col.rgb *= diffuse;
+                return col ;
             }
             ENDCG
         }
