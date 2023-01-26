@@ -49,14 +49,18 @@
                 o.uvGrab = ComputeGrabScreenPos(o.vertex);
 				o.uv = TRANSFORM_TEX(v.uv,_MainTex);
 				o.uvBump = TRANSFORM_TEX(v.uv,_BumpMap);
+
+				// o.uvGrab.y = sin( _SinTime.z);
+
+				o.uvGrab.xy = _ScaleUV * o.uvGrab.z + o.uvGrab.xy;
                 return o;
             }
 
             fixed4 frag(v2f i) : SV_Target
             {
-				half2 bump = UnpackNormal(tex2D(_BumpMap, i.uvBump)).rg;
-				float2 offset = bump * _ScaleUV * _GrabTexture_TexelSize.xy;
-				i.uvGrab.xy = offset * i.uvGrab.z + i.uvGrab.xy;
+				// half2 bump = UnpackNormal(tex2D(_BumpMap, i.uvBump)).rg;
+				// float2 offset = bump * _ScaleUV * _GrabTexture_TexelSize.xy;
+				// i.uvgrab.xy = offset * i.uvgrab.z + i.uvgrab.xy;
 
                 fixed4 col = tex2Dproj(_GrabTexture, i.uvGrab);
 				fixed4 tint = tex2D(_MainTex, i.uv);
