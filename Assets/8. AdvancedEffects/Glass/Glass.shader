@@ -43,12 +43,6 @@
 			float4 _BumpMap_ST;
 			float _ScaleUV;
 
-			float circle (float2 p, float center, float radius, float smooth)
-            {
-                float c = length(p - center) - radius;
-                return smoothstep(c - smooth, c + smooth, radius);
-            }
-
             v2f vert(appdata v) {
 				 
                 v2f o;
@@ -56,20 +50,14 @@
                 o.uvGrab = ComputeGrabScreenPos(o.vertex);
 				o.uv = TRANSFORM_TEX(v.uv,_MainTex);
 				o.uvBump = TRANSFORM_TEX(v.uv,_BumpMap);
-
-				float waveWeight = circle(frac(o.uvGrab), .5 , .5, 1);
-
-				o.uvGrab.xy = frac(sin(o.uvGrab.xy * waveWeight)) ;
-
-				o.uvGrab.xy = _ScaleUV * o.uvGrab.z + o.uvGrab.xy;
                 return o;
             }
 
             fixed4 frag(v2f i) : SV_Target
             {
-				// half2 bump = UnpackNormal(tex2D(_BumpMap, i.uvBump)).rg;
-				// float2 offset = bump * _ScaleUV * _GrabTexture_TexelSize.xy;
-				// i.uvgrab.xy = offset * i.uvgrab.z + i.uvgrab.xy;
+				 half2 bump = UnpackNormal(tex2D(_BumpMap, i.uvBump)).rg;
+				 float2 offset = bump * _ScaleUV * _GrabTexture_TexelSize.xy;
+				 i.uvGrab.xy = offset * i.uvGrab.z + i.uvGrab.xy;
 
                 fixed4 col = tex2Dproj(_GrabTexture, i.uvGrab);
 				fixed4 tint = tex2D(_MainTex, i.uv);
