@@ -1,4 +1,4 @@
-﻿Shader "Moein/VertexLit/Simple_Surface_Multi_Wave"
+﻿Shader "Moein/VertexLit/Simple_Surface_Wave"
 {
     // SinCos   (t/8 , t/4, t/2, t  )
     // time     (t/20, t  , t*2, t*3)
@@ -7,36 +7,14 @@
         _MainTex("Main Texture", 2D) = "white"{}
         _Color ("Color", Color) = (1,1,1,1)
 
-        [Header(Wave Fields 1)]
+        [Header(Wave Fields)]
         [Space]
-        _Amplitude1("Amplitude 1", Float) = 1
-        _WavePower1("Wave Power 1", Range(0, 10)) = 1
-        _Smooth1 ("Smooth 1", Range(0.0, 0.5)) = 0.01
-        _Radius1 ("Radius 1", Range(0.0, 0.5)) = 0.3
-        _MovingSpeedX1("Moving Speed X 1", Float) = 0
-        _MovingSpeedZ1("Moving Spedd Y 1", Float) = 0
-
-        [Header(Wave Fields 2)]
-        [Space]
-        _Amplitude2("Amplitude 2", Float) = 1
-        _WavePower2("Wave Power 2", Range(0, 10)) = 1
-        _Smooth2 ("Smooth 2", Range(0.0, 0.5)) = 0.01
-        _Radius2 ("Radius 2", Range(0.0, 0.5)) = 0.3
-        _MovingSpeedX2("Moving Speed X 2", Float) = 0
-        _MovingSpeedZ2("Moving Spedd Y 2", Float) = 0
-
-        [Header(Wave Fields 3)]
-        [Space]
-        _Amplitude3("Amplitude 3", Float) = 1
-        _WavePower3("Wave Power 3", Range(0, 10)) = 1
-        _Smooth3 ("Smooth 3", Range(0.0, 0.5)) = 0.01
-        _Radius3 ("Radius 3", Range(0.0, 0.5)) = 0.3
-        _MovingSpeedX3("Moving Speed X 3", Float) = 0
-        _MovingSpeedZ3("Moving Spedd Y 3", Float) = 0
-
-        //[Header(Lighting)]
-        //_CustomLightColor ("Lighting Color", Color) = (1,1,1)
-        //_CustomLightDir("Lighting Direction", Vector) = (1,1,1)
+        _Amplitude("Amplitude", Float) = 1
+        _WavePower("Wave Power", Range(0, 10)) = 1
+        _Smooth ("Smooth", Range(0.0, 0.5)) = 0.01
+        _Radius ("Radius", Range(0.0, 0.5)) = 0.3
+        _MovingSpeedX("Moving Speed X", Float) = 0
+        _MovingSpeedZ("Moving Spedd Y", Float) = 0 
         
     }
     SubShader
@@ -81,51 +59,23 @@
             sampler2D _MainTex;
             float4 _MainTex_ST;
 
-            float _Amplitude1;
-            float _WavePower1;
-            float _MovingSpeedX1;
-            float _MovingSpeedZ1;
-            float _Smooth1;
-            float _Radius1;
-
-            float _Amplitude2;
-            float _WavePower2;
-            float _MovingSpeedX2;
-            float _MovingSpeedZ2;
-            float _Smooth2;
-            float _Radius2;
-
-            float _Amplitude3;
-            float _WavePower3;
-            float _MovingSpeedX3;
-            float _MovingSpeedZ3;
-            float _Smooth3;
-            float _Radius3;
-
-            float3 _CustomLightColor;
-            float4 _CustomLightDir;
+            float _Amplitude;
+            float _WavePower;
+            float _MovingSpeedX;
+            float _MovingSpeedZ;
+            float _Smooth;
+            float _Radius;
 
             v2g vert (appdata v)
             {
                 v2g o;
-                v.uv.x += _MovingSpeedX1 * _Time.x;
-                v.uv.y += _MovingSpeedZ1 * _Time.x;
+                v.uv.x += _MovingSpeedX * _Time.x;
+                v.uv.y += _MovingSpeedZ * _Time.x;
                 float vertexrandpos = random(v.vertex.xz);
-                float waveWeight = circle(frac(v.uv), .5 , _Radius1, _Smooth1) * _WavePower1;
-                v.vertex.y = waveWeight + vertexrandpos * _Amplitude1;
-
-                v.uv.x += _MovingSpeedX2 * _Time.x;
-                v.uv.y += _MovingSpeedZ2 * _Time.x;
-                waveWeight = circle(frac(v.uv), .5 , _Radius2, _Smooth2) * _WavePower2;
-                v.vertex.y += waveWeight + vertexrandpos * _Amplitude2;
-
-                v.uv.x += _MovingSpeedX3 * _Time.x;
-                v.uv.y += _MovingSpeedZ3 * _Time.x;
-                waveWeight = circle(frac(v.uv), .5 , _Radius3, _Smooth3) * _WavePower3;
-                v.vertex.y += waveWeight + vertexrandpos * _Amplitude3;
+                float waveWeight = circle(frac(v.uv), .5 , _Radius, _Smooth) * _WavePower;
+                v.vertex.y = waveWeight + vertexrandpos * _Amplitude;
                 v.vertex.x += vertexrandpos * _SinTime.z / 10;
                 v.vertex.z += vertexrandpos * _SinTime.x / 10;
-
                 o.pos = UnityObjectToClipPos(v.vertex);
                 o.vertex = v.vertex;
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
