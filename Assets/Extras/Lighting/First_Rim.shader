@@ -50,7 +50,7 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
-                return  _RimColor * i.rimColor * _RimInt;;
+                return  _RimColor * i.rimColor * _RimInt;
             }
             ENDCG
         }

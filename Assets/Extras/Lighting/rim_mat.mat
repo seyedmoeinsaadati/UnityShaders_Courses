@@ -69,7 +69,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RimInt: 0.888
+    - _RimInt: 1
     - _RimPow: 1.69
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
