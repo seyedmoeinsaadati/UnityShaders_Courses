@@ -2,17 +2,21 @@
 {
     Properties
     {
+        [Space(10)]
+        _CameraOffset ("Camera Offset", Float) = 1
+
+        [Space(10)]
         _Color("Color", Color) = (1,1,1,1)
         _MainTex ("Texture", 2D) = "white" {}
 
         _Ambient("Ambient Intensity", Range(0, 1)) = 1
-        _LightInt ("Light Intensity", Range(0, 1)) = 1
+        _LightInt ("Light Intensity", Range(0, 1)) = 1        
 
         [Space(10)]
         [Toggle]
         _Rim ("Rim", Float) = 0
         _RimInt("Rim Intensity", Range(0, 1)) = 1
-        _RimPow("Rim Power", Range(1,5)) = 1
+        _RimPow("Rim Power", Range(1,20)) = 1
         [HDR]_RimColor("Rim Color", Color) = (1,1,1,1)
     }
     SubShader
@@ -55,6 +59,8 @@
             float _Ambient;
             float _LightInt;
 
+            float _CameraOffset;
+
 #if _RIM_ON
             float _RimInt;
             float _RimPow;
@@ -84,22 +90,20 @@
                 o.rimColor = pow(1- max(0, dot(viewDir, worldNormal)), _RimPow);
 #endif
 
-                float depth = length(UnityObjectToViewPos(v.vertex));
-                o.diffuse.rgb += 1-lerp(0, 1, depth / (_ProjectionParams.z - _ProjectionParams.y));
-
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
+                float depth = (i.vertex.z / i.vertex.w) * _CameraOffset;
+                i.diffuse.rgb += smoothstep(0, 1, depth);
+
                 fixed4 col = tex2D(_MainTex, i.uv) * _Color;
                 col.rgb *= i.diffuse;
 
 #if _RIM_ON     
-                col += i.rimColor  * _RimColor * _RimInt;
+                col *= i.rimColor  * _RimColor * _RimInt;
 #endif
-
-                
                 
                 return col;
             }
