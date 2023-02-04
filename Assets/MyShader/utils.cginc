@@ -1,8 +1,30 @@
+// Noises
 float random (float2 uv)
 {
     return frac(sin(dot(uv,float2(12.9898,78.233)))*43758.5453123);
 }
 
+float plasma(float2 pos, float t, float verticalSpeed, float horizontalSpeed, float diagonalSpeed, float circularSpeed){
+                
+    //vertical
+    float c = sin(pos.x * verticalSpeed + t);
+
+    // horizontal
+    c += sin(pos.y * horizontalSpeed + t);
+
+    // diagonal
+    c += sin(diagonalSpeed * ((sin(t/2.0) * pos.x + cos(t/3) * pos.y)) + t);
+
+    // circular
+    float c1 = pow(pos.x + .5 * sin(t/5), 2);
+    float c2 = pow(pos.y + .5 * cos(t/5), 2);
+    c += sin(sqrt(circularSpeed * (c1 + c2) + t));
+
+    return c;
+}
+
+
+// Mathematics
 void rotate(float2 UV, float2 center, float angle,out float2 Out)
 {
     angle = angle * (UNITY_PI/180.0f);
@@ -24,21 +46,15 @@ float circle (float2 p, float center, float radius, float smooth)
     return smoothstep(c - smooth, c + smooth, radius);
 }
 
-float plasma(float2 pos, float t, float verticalSpeed, float horizontalSpeed, float diagonalSpeed, float circularSpeed){
-                
-    //vertical
-    float c = sin(pos.x * verticalSpeed + t);
 
-    // //horizontal
-    c += sin(pos.y * horizontalSpeed + t);
+// Lighing Methods
+float3 lambert_shading(float3 colorRefl, float lightInt, float3 normal, float3 lightDir)
+{
+    return colorRefl * lightInt * max(0, dot(normal, lightDir));
+}
 
-    // // diagonal
-    c += sin(diagonalSpeed * (sin(t/2.0) * pos.x + cos(t/3) * pos.y) + t);
-
-    // // circular
-    float c1 = pow(pos.x + .5 * sin(t/5), 2);
-    float c2 = pow(pos.y + .5 * cos(t/5), 2);
-    c += sin(sqrt(circularSpeed * (c1 + c2) + t));
-
-    return c;
+float3 specular_shading(float3 colorRefl, float specularInt, float3 normal, float3 lightDir, float3 viewDir, float specularPow)
+{
+    float3 h = normalize(lightDir + viewDir);
+    return colorRefl * specularInt * pow(max (0 , dot(normal, h)), specularPow);
 }
