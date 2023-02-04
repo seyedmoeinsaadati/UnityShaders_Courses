@@ -23,3 +23,22 @@ float circle (float2 p, float center, float radius, float smooth)
     float c = length(p - center) - radius;
     return smoothstep(c - smooth, c + smooth, radius);
 }
+
+float plasma(float2 pos, float t, float verticalSpeed, float horizontalSpeed, float diagonalSpeed, float circularSpeed){
+                
+    //vertical
+    float c = sin(pos.x * verticalSpeed + t);
+
+    // //horizontal
+    c += sin(pos.y * horizontalSpeed + t);
+
+    // // diagonal
+    c += sin(diagonalSpeed * (sin(t/2.0) * pos.x + cos(t/3) * pos.y) + t);
+
+    // // circular
+    float c1 = pow(pos.x + .5 * sin(t/5), 2);
+    float c2 = pow(pos.y + .5 * cos(t/5), 2);
+    c += sin(sqrt(circularSpeed * (c1 + c2) + t));
+
+    return c;
+}
