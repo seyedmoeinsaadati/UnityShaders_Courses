@@ -1,4 +1,4 @@
-﻿Shader "Moein/Simple_Phong"
+﻿Shader "Moein/VertexLit/Phong"
 {
     Properties
     {
