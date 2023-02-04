@@ -4,6 +4,8 @@
     {
         [Space(10)]
         _CameraOffset ("Camera Offset", Float) = 1
+        _SurfaceColor ("Surface Color", Color) = (1,1,1)
+        _DepthColor ("Depth Color", Color) = (0,0,0)
 
         [Space(10)]
         _Color("Color", Color) = (1,1,1,1)
@@ -49,7 +51,6 @@
 #if _RIM_ON
                 float4 rimColor : COLOR1;
 #endif
-
             };
 
             float4 _Color;
@@ -60,6 +61,8 @@
             float _LightInt;
 
             float _CameraOffset;
+            float3 _SurfaceColor;
+            float3 _DepthColor;
 
 #if _RIM_ON
             float _RimInt;
@@ -96,14 +99,15 @@
             fixed4 frag (v2f i) : SV_Target
             {
                 float depth = (i.vertex.z / i.vertex.w) * _CameraOffset;
-                i.diffuse.rgb += smoothstep(0, 1, depth);
+                i.diffuse.rgb += lerp(_DepthColor, _SurfaceColor, depth);;
+                
+#if _RIM_ON     
+                i.diffuse.rgb += depth * i.rimColor * _RimColor * _RimInt;
+#endif
 
                 fixed4 col = tex2D(_MainTex, i.uv) * _Color;
                 col.rgb *= i.diffuse;
 
-#if _RIM_ON     
-                col *= i.rimColor  * _RimColor * _RimInt;
-#endif
                 
                 return col;
             }
