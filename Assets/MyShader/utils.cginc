@@ -4,21 +4,21 @@ float random (float2 uv)
     return frac(sin(dot(uv,float2(12.9898,78.233)))*43758.5453123);
 }
 
-float plasma(float2 pos, float t, float verticalSpeed, float horizontalSpeed, float diagonalSpeed, float circularSpeed){
+float plasma(float2 pos, float t, float verticalScale, float horizontalScale, float diagonalScale, float circularScale){
                 
     //vertical
-    float c = sin(pos.x * verticalSpeed + t);
+    float c = sin((pos.x + t) * verticalScale);
 
     // horizontal
-    c += sin(pos.y * horizontalSpeed + t);
+    c += sin((pos.y + t) * horizontalScale);
 
     // diagonal
-    c += sin(diagonalSpeed * ((sin(t/2.0) * pos.x + cos(t/3) * pos.y)) + t);
+    c += sin(diagonalScale * ((sin(t/2.0) * pos.x + cos(t/3) * pos.y) + t));
 
     // circular
     float c1 = pow(pos.x + .5 * sin(t/5), 2);
     float c2 = pow(pos.y + .5 * cos(t/5), 2);
-    c += sin(sqrt(circularSpeed * (c1 + c2) + t));
+    c += sin(sqrt(circularScale * (c1 + c2 + t)));
 
     return c;
 }
