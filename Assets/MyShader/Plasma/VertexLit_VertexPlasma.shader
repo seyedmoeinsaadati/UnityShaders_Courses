@@ -20,7 +20,7 @@
     }
     SubShader
     {
-        Tags { "RenderType" = "Opaque"}
+        Tags { "RenderType"="Opaque" "LightMode"="ForwardBase"}
 
         Pass
         {
@@ -73,7 +73,7 @@
 
                 float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);
                 half3 diffuse = lambert_shading(_LightColor0.rgb, _LightInt, worldNormal, lightDir);
-                o.color.rgb *= diffuse;
+                o.color.rgb += diffuse;
     
                 return o;
             }
@@ -81,7 +81,7 @@
             fixed4 frag (v2f i) : SV_TARGET
             {
                 fixed4 col = tex2D(_MainTex, i.uv) * _Color;
-                col.rgb += i.color;
+                col.rgb *= i.color;
                 return col;
 
                 // debug mode: render plasma color
