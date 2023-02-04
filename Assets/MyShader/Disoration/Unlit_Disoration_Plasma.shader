@@ -8,11 +8,13 @@ Shader "Moein/Disoration/Plasma"
         _Color("Color", Color) = (1,1,1,1)
 		_MainTex ("Texture", 2D) = "white" {}
 
+        _ScaleX("Scale X", Range(0, 100)) = 10
+        _ScaleY("Scale Y", Range(0, 100)) = 10
+
         [Space(20)]
         [Header(Plasma Fields)]
         [Space(10)]
         _Speed("Speed", Float) = 10
-        _Plasma("Disoration Scale", Range(0, 100)) = 10
 		_Scale1("Vertical Scale", Float) = 2
 		_Scale2("Horizontal Scale", Float) = 2
 		_Scale3("Diagonal Scale", Float) = 2
@@ -65,7 +67,7 @@ Shader "Moein/Disoration/Plasma"
 			float4 _MainTex_ST;
             float4 _Color;
 
-            float _Speed, _Plasma;
+            float _Speed, _ScaleX, _ScaleY;
 			float _Scale1,_Scale2,_Scale3,_Scale4;
 
             v2f vert(appdata v) {
@@ -74,21 +76,17 @@ Shader "Moein/Disoration/Plasma"
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uvGrab = ComputeGrabScreenPos(o.vertex);
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                
                 o.uvNoise = v.uv;
-                o.uvNoise.x += _Time.x * _Speed;
-                o.uvNoise.y += _Time.x * _Speed;
 
                 return o;
             }
 
             fixed4 frag(v2f i) : SV_Target
             {
-				// half2 noise = UnpackNormal(tex2D(_NoiseMap, i.uvNoise)).rg;
-                // noise.x *= _ScaleU;
-                // noise.y *= _ScaleV;
-                float plasmaValue = abs(plasma(i.uvNoise, _Time.x, _Scale1, _Scale2, _Scale3, _Scale4));
-				float2 offset = plasmaValue * _GrabTexture_TexelSize.xy * _Plasma;
+                float plasmaValue = plasma(i.uvNoise, _Time.x * _Speed, _Scale1, _Scale2, _Scale3, _Scale4);
+				float2 offset = plasmaValue * _GrabTexture_TexelSize.xy;
+                offset.x *= _ScaleX;
+                offset.y *= _ScaleY;
 				i.uvGrab.xy = offset * i.uvGrab.z + i.uvGrab.xy;
 
                 fixed4 col = tex2Dproj(_GrabTexture, i.uvGrab);

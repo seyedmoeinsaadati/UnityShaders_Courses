@@ -28,11 +28,11 @@ Material:
     - _AmbientInt: 0.803
     - _LightInt: 1
     - _Plasma: 0.1
-    - _Scale1: 1
-    - _Scale2: 2
-    - _Scale3: 10
-    - _Scale4: 60
-    - _Speed: 50
+    - _Scale1: 0
+    - _Scale2: 0
+    - _Scale3: 0
+    - _Scale4: 0
+    - _Speed: 5
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _LightColorX: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 1}

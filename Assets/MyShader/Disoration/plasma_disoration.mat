@@ -32,13 +32,15 @@ Material:
     - _ColorMask: 15
     - _DstBlend: 0
     - _Plasma: 7.6
-    - _Scale1: 10
-    - _Scale2: 10
+    - _Scale1: 5
+    - _Scale2: 5
     - _Scale3: 10
-    - _Scale4: 40
+    - _Scale4: 10
     - _ScaleU: 20
     - _ScaleV: 20
-    - _Speed: 0.05
+    - _ScaleX: 20
+    - _ScaleY: 20
+    - _Speed: 10
     - _SpeedU: 0
     - _SpeedV: 0
     - _SrcBlend: 5
