@@ -40,7 +40,7 @@
 				// circular
 				float c1 = pow(IN.worldPos.x + .5 * sin(t/5), 2);
 				float c2 = pow(IN.worldPos.z + .5 * cos(t/5), 2);
-				c += sin(sqrt(_Scale4 * (c1 + c2) + 1 + 5));
+				c += sin(sqrt(_Scale4 * (c1 + c2) + t));
 
 				o.Albedo.r = sin(c/4 * UNITY_PI);
 				o.Albedo.g = sin(c/4 * UNITY_PI + UNITY_PI / 2);
