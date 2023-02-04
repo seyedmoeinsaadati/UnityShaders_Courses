@@ -1,5 +1,5 @@
 ﻿// NOTE: it's campatiable with OpenGL and dont' use with DirectX
-Shader "Moein/Disoration/NoiseMap"
+Shader "Moein/Disoration/Plasma"
 {
     // SinCos   (t/8 , t/4, t/2, t  )
     // time     (t/20, t  , t*2, t*3)
@@ -8,13 +8,15 @@ Shader "Moein/Disoration/NoiseMap"
         _Color("Color", Color) = (1,1,1,1)
 		_MainTex ("Texture", 2D) = "white" {}
 
+        [Space(20)]
+        [Header(Plasma Fields)]
         [Space(10)]
-        [Header(Noise Fields)]
-        _NoiseMap ("Noise Map", 2D) = "bump" {}
-        _ScaleU ("Scale U", Float) = 1
-        _ScaleV ("Scale V", Float) = 1
-        _SpeedU ("Speed U", Float) = 1
-        _SpeedV ("Speed V", Float) = 1
+        _Speed("Speed", Float) = 10
+        _Plasma("Disoration Scale", Range(0, 100)) = 10
+		_Scale1("Vertical Scale", Float) = 2
+		_Scale2("Horizontal Scale", Float) = 2
+		_Scale3("Diagonal Scale", Float) = 2
+		_Scale4("Circular Scale", Float) = 2
 
         [Space(10)]
         [Header(Blending)]
@@ -41,6 +43,7 @@ Shader "Moein/Disoration/NoiseMap"
             #pragma vertex vert
             #pragma fragment frag
             #include "UnityCG.cginc"
+            #include "Assets/MyShader/utils.cginc"
 
             struct appdata
 			{
@@ -60,10 +63,10 @@ Shader "Moein/Disoration/NoiseMap"
 			float4 _GrabTexture_TexelSize;
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
-            sampler2D _NoiseMap;
-			float4 _NoiseMap_ST;
             float4 _Color;
-            float _ScaleU, _ScaleV, _SpeedU, _SpeedV;
+
+            float _Speed, _Plasma;
+			float _Scale1,_Scale2,_Scale3,_Scale4;
 
             v2f vert(appdata v) {
 				 
@@ -71,23 +74,29 @@ Shader "Moein/Disoration/NoiseMap"
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uvGrab = ComputeGrabScreenPos(o.vertex);
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                o.uvNoise = TRANSFORM_TEX(v.uv, _NoiseMap);
-                o.uvNoise.x += _Time.x * _SpeedU;
-                o.uvNoise.y += _Time.x * _SpeedV;
+                
+                o.uvNoise = v.uv;
+                o.uvNoise.x += _Time.x * _Speed;
+                o.uvNoise.y += _Time.x * _Speed;
 
                 return o;
             }
 
             fixed4 frag(v2f i) : SV_Target
             {
-				half2 noise = UnpackNormal(tex2D(_NoiseMap, i.uvNoise)).rg;
-                noise.x *= _ScaleU;
-                noise.y *= _ScaleV;
-				float2 offset = noise * _GrabTexture_TexelSize.xy;
+				// half2 noise = UnpackNormal(tex2D(_NoiseMap, i.uvNoise)).rg;
+                // noise.x *= _ScaleU;
+                // noise.y *= _ScaleV;
+                float plasmaValue = abs(plasma(i.uvNoise, _Time.x, _Scale1, _Scale2, _Scale3, _Scale4));
+				float2 offset = plasmaValue * _GrabTexture_TexelSize.xy * _Plasma;
 				i.uvGrab.xy = offset * i.uvGrab.z + i.uvGrab.xy;
 
                 fixed4 col = tex2Dproj(_GrabTexture, i.uvGrab);
 				fixed4 tint = tex2D(_MainTex, i.uv) * _Color;
+
+                // debug mode: render plasma color
+                // tint = plasmaValue * _Color;
+                
 				col *= tint;
                 return col;
             }

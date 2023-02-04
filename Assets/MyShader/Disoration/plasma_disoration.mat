@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: disoration
-  m_Shader: {fileID: 4800000, guid: 0f3854a85abe27c4f85f7ac066523b67, type: 3}
+  m_Name: plasma_disoration
+  m_Shader: {fileID: 4800000, guid: 7f35559016effc64c8ca39e9b61fcee4, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -30,9 +30,15 @@ Material:
     m_Floats:
     - _BlendOp: 0
     - _ColorMask: 15
-    - _DstBlend: 10
+    - _DstBlend: 0
+    - _Plasma: 7.6
+    - _Scale1: 10
+    - _Scale2: 10
+    - _Scale3: 10
+    - _Scale4: 40
     - _ScaleU: 20
     - _ScaleV: 20
+    - _Speed: 0.05
     - _SpeedU: 0
     - _SpeedV: 0
     - _SrcBlend: 5
