@@ -19,14 +19,7 @@
             "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"8a753d77-0812-43bc-afb8-4be5781879f0\"\n    },\n    \"m_Name\": \"Vector1\",\n    \"m_DefaultReferenceName\": \"Vector1_85DF1A38\",\n    \"m_OverrideReferenceName\": \"\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": 0.0,\n    \"m_FloatType\": 3,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
         }
     ],
-    "m_SerializedKeywords": [
-        {
-            "typeInfo": {
-                "fullName": "UnityEditor.ShaderGraph.ShaderKeyword"
-            },
-            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"cd517e1a-6214-4c1c-9e9c-39605bf1aa37\"\n    },\n    \"m_Name\": \"Boolean\",\n    \"m_DefaultReferenceName\": \"BOOLEAN_6FC433F8_ON\",\n    \"m_OverrideReferenceName\": \"\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_KeywordType\": 0,\n    \"m_KeywordDefinition\": 0,\n    \"m_KeywordScope\": 0,\n    \"m_Entries\": [],\n    \"m_Value\": 0,\n    \"m_IsEditable\": true,\n    \"m_IsExposable\": true\n}"
-        }
-    ],
+    "m_SerializedKeywords": [],
     "m_SerializableNodes": [
         {
             "typeInfo": {
@@ -89,7 +82,7 @@
     ],
     "m_PreviewData": {
         "serializedMesh": {
-            "m_SerializedMesh": "{\"mesh\":{\"fileID\":10202,\"guid\":\"0000000000000000e000000000000000\",\"type\":0}}",
+            "m_SerializedMesh": "{\"mesh\":{\"fileID\":10205,\"guid\":\"0000000000000000e000000000000000\",\"type\":0}}",
             "m_Guid": ""
         }
     },
