@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: vertexlit_plasma
-  m_Shader: {fileID: 4800000, guid: cac0271ee9c31a542a7d941577850f25, type: 3}
+  m_Name: vertexlit_drop
+  m_Shader: {fileID: 4800000, guid: 9de2050106647674b8a4a3e2987f696f, type: 3}
   m_ShaderKeywords: _ADDITIONALTILE_NONE _AMBIENT_ON _REVERSE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -35,6 +35,7 @@ Material:
     - _Speed: 5
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Direction: {r: 0, g: 0, b: 0, a: 0}
     - _LightColorX: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 1}
     - _LightColorY: {r: 1, g: 1, b: 1, a: 1}
     - _LightColorZ: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
