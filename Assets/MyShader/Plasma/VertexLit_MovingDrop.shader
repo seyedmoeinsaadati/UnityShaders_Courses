@@ -13,9 +13,9 @@
         [Space(10)]
         _Speed("Speed", Float) = 10
         _Plasma("Wieght", Range(0, 1)) = 10
-		_Scale1("Vertical Scale", Float) = 2
-		_Scale2("Horizontal Scale", Float) = 2
-		_Scale3("Diagonal Scale", Float) = 2
+		_Scale1("X Scale", Float) = 2
+		_Scale2("Y Scale", Float) = 2
+		_Scale3("Z Scale", Float) = 2
 		_Scale4("Circular Scale", Float) = 2
 
         _Direction("Direction", Vector) = (0,0,0,0)
@@ -65,16 +65,14 @@
             {
                 v2f o;
 
-                float t = _Time.x * _Speed;
+                float directionFactor = clamp(length(_Direction.xyz), .1, 100);
+                float t = _Time.x * _Speed * directionFactor;
 
-                o.plasma = abs(plasma(v.vertex.xy, t, _Scale1, _Scale2, _Scale3, _Scale4));
+                float angle = dot(v.normal, _Direction.xyz);
+                v.vertex.xyz = v.vertex.xyz + (angle > 0 ? _Direction.xyz * 1 / 10 : _Direction.xyz) * angle;
+
+                o.plasma = abs(plasma3D(v.vertex.xyz, t, _Scale1 * _Direction.x, _Scale2*_Direction.y, _Scale3 * _Direction.z, _Scale4));
                 v.vertex.xyz += v.normal * o.plasma * _Plasma;
-                
-                float3 norm = _Direction.xyz;
-                float angle = dot(v.normal, norm);
-                v.vertex.xyz = v.vertex.xyz + (angle > 0 ? norm * 1 / 10 : norm) * angle;
-
-                
 
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);

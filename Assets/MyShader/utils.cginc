@@ -23,6 +23,25 @@ float plasma(float2 pos, float t, float verticalScale, float horizontalScale, fl
     return c;
 }
 
+float plasma3D(float3 pos, float t, float xScale, float yScale, float zScale, float circularScale){
+                
+    // X axis
+    float c = sin((pos.x + t) * xScale);
+
+    // Y axis
+    c += sin((pos.y + t) * yScale);
+
+    // Z axis
+    c += sin((pos.z + t) * zScale);
+
+    // circular
+    float c1 = pow(pos.x + .5 * sin(t/5), 2);
+    float c2 = pow(pos.y + .5 * cos(t/5), 2);
+    c += sin(sqrt(circularScale * (c1 + c2 + t)));
+
+    return c;
+}
+
 
 // Mathematics
 void rotate(float2 UV, float2 center, float angle,out float2 Out)

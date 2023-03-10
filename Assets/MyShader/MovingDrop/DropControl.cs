@@ -35,7 +35,7 @@ public class DropControl : MonoBehaviour
 
         if (direction != Vector3.zero)
         {
-            shaderDirection = Vector3.Lerp(shaderDirection, direction, speed * Time.deltaTime);
+            shaderDirection = Vector3.Lerp(shaderDirection, direction, speed/2 * Time.deltaTime);
         }
         else
         {
