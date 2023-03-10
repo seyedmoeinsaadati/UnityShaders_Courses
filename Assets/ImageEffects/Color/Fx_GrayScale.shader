@@ -5,9 +5,9 @@
         [HideInInspector]
         _MainTex ("Texture", 2D) = "white" {}
 
-        _RPower("Red power", Range(0.001, 1)) = 1
-        _GPower("Green power", Range(0.001, 1)) = 1
-        _BPower("Blue power", Range(0.001, 1)) = 1
+        _RPower("Red power", Range(0.001, 1)) = .299
+        _GPower("Green power", Range(0.001, 1)) = .587
+        _BPower("Blue power", Range(0.001, 1)) = .114
         _Brightness("Brightness", Range(0, 2)) = 1
 
         [Toggle]
@@ -58,8 +58,7 @@
                 float grayscale = (col.r * _RPower + col.g * _GPower + col.b * _BPower) / (_RPower + _GPower + _BPower);
 
 #if _ADDCOLOR_ON
-                fixed4 tempCol = col;
-                tempCol = grayscale;
+                fixed4 tempCol = grayscale;
                 tempCol.r += _RPower * col.r;
                 tempCol.g += _GPower * col.g;
                 tempCol.b += _BPower * col.b;
