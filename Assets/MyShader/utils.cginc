@@ -44,6 +44,23 @@ float plasma3D(float3 pos, float t, float xScale, float yScale, float zScale, fl
 
 
 // Mathematics
+float invLerp(float a, float b, float value){
+    return (value - b) / (b-a);
+}
+
+float2 invLerp(float2 a, float2 b, float2 value){
+    return (value - b) / (b-a);
+}
+
+float3 invLerp(float3 a, float3 b, float3 value){
+    return (value - b) / (b-a);
+}
+
+float4 invLerp(float4 a, float4 b, float4 value){
+    return (value - b) / (b-a);
+}
+
+
 void rotate(float2 UV, float2 center, float angle,out float2 Out)
 {
     angle = angle * (UNITY_PI/180.0f);
