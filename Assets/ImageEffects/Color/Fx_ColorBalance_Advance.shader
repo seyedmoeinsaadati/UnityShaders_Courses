@@ -1,4 +1,4 @@
-﻿Shader "Moein/ImageEffect/ColorBalance"
+﻿Shader "Moein/ImageEffect/ColorBalance_Advance"
 {
     Properties
     {
@@ -14,10 +14,17 @@
         _BOffset("Blue", Range(0, 1)) = 0
         [Space(5)]
         [Toggle] _GrayScaleToggle("Grayscale", Float) = 0
+        _Grayscale_Red("Grayscale Red", Range(0.001, 1)) = .299
+        _Grayscale_Green("Grayscale Green", Range(0.001, 1)) = .587
+        _Grayscale_Blue("Grayscale Blue", Range(0.001, 1)) = .114
         [Space(5)]
         [Toggle] _ContrastToggle("Contrast", Float) = 0
-        _MinContrast("Min", Range(0, 1)) = 0
-        _MaxContrast("Max", Range(0, 1)) = 1
+        _RedMinContrast("Red - Min", Range(0, 1)) = 0
+        _RedMaxContrast("Red - Max", Range(0, 1)) = 1
+        _GreenMinContrast("Green - Min", Range(0, 1)) = 0
+        _GreenMaxContrast("Green - Max", Range(0, 1)) = 1
+        _BlueMinContrast("Blue - Min", Range(0, 1)) = 0
+        _BlueMaxContrast("Blue - Max", Range(0, 1)) = 1
     }
 
     SubShader
@@ -68,9 +75,18 @@
             float _GOffset;
             float _BOffset;
 
+            // grayscale
+            float _Grayscale_Red;
+            float _Grayscale_Green;
+            float _Grayscale_Blue;
+
             // contrast
-            float _MinContrast;
-            float _MaxContrast;
+            float _RedMinContrast;
+            float _RedMaxContrast;
+            float _GreenMinContrast;
+            float _GreenMaxContrast;
+            float _BlueMinContrast;
+            float _BlueMaxContrast;
 
             float _Brightness;
 
@@ -91,11 +107,12 @@
 #endif
 
 #if _GRAYSCALETOGGLE_ON
-                col = col.r * .299 + col.g * .587 + col.b * .114;
+                float grayscale = (col.r * _Grayscale_Red + col.g * _Grayscale_Green + col.b * _Grayscale_Blue) / (_Grayscale_Red + _Grayscale_Green + _Grayscale_Blue);
+                col = grayscale;
 #endif
 
 #if _CONTRASTTOGGLE_ON
-                col.rgb = invLerp(float3(_MinContrast,_MinContrast,_MinContrast), float3(_MaxContrast,_MaxContrast,_MaxContrast), col.rgb);
+                col.rgb = invLerp(float3(_RedMinContrast,_GreenMinContrast,_BlueMinContrast), float3(_RedMaxContrast,_GreenMaxContrast,_BlueMaxContrast), col.rgb);
 #endif
 
                 col *= _Brightness;

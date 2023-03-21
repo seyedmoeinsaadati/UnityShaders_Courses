@@ -7,9 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: addColor
-  m_Shader: {fileID: 4800000, guid: 826dd03fa16e49e43b8045c58fdcafce, type: 3}
-  m_ShaderKeywords: _MODE_MULTIPLY
+  m_Name: ColorBalance_Advanced
+  m_Shader: {fileID: 4800000, guid: 7098653ac2b09f14cb2d9cc6f0b16fc3, type: 3}
+  m_ShaderKeywords: _COLORMODE_ADD _COLORTOGGLE_ON _COLOR_TOGGLE_ON _CONTRASTTOGGLE_ON
+    _MODE_MULTIPLY
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -56,21 +57,37 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _BOffset: 255
+    - _BOffset: 0
+    - _BlueMaxContrast: 1
+    - _BlueMinContrast: 0
     - _Brightness: 1
     - _BumpScale: 1
+    - _ColorMode: 1
+    - _ColorToggle: 1
+    - _Color_Toggle: 1
+    - _ContrastToggle: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _GOffset: 255
+    - _GOffset: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _GrayScaleToggle: 0
+    - _Grayscale_Blue: 0.114
+    - _Grayscale_Green: 0.587
+    - _Grayscale_Red: 0.389
+    - _GreenMaxContrast: 1
+    - _GreenMinContrast: 0
+    - _MaxContrast: 0.493
     - _Metallic: 0
+    - _MinContrast: 0.209
     - _Mode: 2
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _ROffset: 255
+    - _ROffset: 0.194
+    - _RedMaxContrast: 1
+    - _RedMinContrast: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
