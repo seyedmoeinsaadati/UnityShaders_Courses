@@ -1,25 +1,20 @@
-﻿Shader "Moein/Unlit/Alpha_Disitance"
+﻿Shader "Moein/Unlit/Eyeball/Human"
 {
     Properties
     {
         _Color("Color", Color) = (1,1,1)
-        _MainTex("Main Text", 2D) = "black"{}
-        _CameraOffset("Camera Min", Float) = 200
-        _Smoothness("Smooth", Range(0, 1)) = 1
+        _MainTex("Main Text", 2D) = "white"{}
 
-        [Enum(ON, 1, OFF, 0)]
-        _ZWrite("Z Write", Float)  = 0
-        [KeywordEnum(Less, Less, Greater,Greater,LEqual,LEqual,GEqual,GEqual,Equal,Equal,NotEqual,NotEqual,Always,Always)]
-        _ZTest("Z Test", Int)  = 2
+        // Rim
+        // Color 1, 2, 3 
+        // Texture 1, 2, 3 
+        // size 1, 2
+        // smoothness
+
     }
     SubShader
     {
-        Tags { "RenderType" = "Transparent" "Queue"= "Transparent"}
-
-        ZWrite [_ZWrite]
-        ZTest [_ZTest]
-        Blend SrcAlpha OneMinusSrcAlpha 
-
+        Tags { "RenderType" = "Opaque" "Queue"= "Opaque"}
         Pass
         {
             CGPROGRAM
@@ -43,8 +38,6 @@
             sampler2D _MainTex;
             float4 _MainTex_ST;
             float4 _Color;
-            float _CameraOffset;
-            float _Smoothness;
 
             v2f vert (appdata v)
             {
@@ -56,9 +49,7 @@
             
             fixed4 frag (v2f i) : SV_TARGET
             {
-                fixed4 col = tex2D(_MainTex, i.uv) * _Color;
-                float depth = (i.vertex.z / i.vertex.w) * _CameraOffset;
-                col.a *= smoothstep(0, _Smoothness, 1-depth);
+                fixed4 col = tex2D(_MainTex, i.uv) * _Color; 
 
                 return col;
             }
