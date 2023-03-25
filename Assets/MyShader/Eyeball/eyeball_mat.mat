@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: eyeball_mat
   m_Shader: {fileID: 4800000, guid: 29af5b456ad430842b463d80c410dc40, type: 3}
-  m_ShaderKeywords: _ADDITIONALTILE_NONE _REVERSE_ON
+  m_ShaderKeywords: _ADDITIONALTILE_NONE _REVERSE_ON _RIMTOGGLE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -48,7 +48,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 830884c18cf5e7a4895ee02c2dcd8e12, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0.25, y: 0}
     - _MetallicGlossMap:
@@ -71,16 +71,16 @@ Material:
     - _AdditionalTile: 0
     - _BOffset: -1.3
     - _BRadius: 0.109
-    - _BScale: 5
-    - _BSmooth: 0.064
+    - _BScale: 2
+    - _BSmooth: 0.089
     - _BlendDest: 0
     - _BlendOp: 0
     - _BlendSrc: 0
     - _BumpScale: 1
     - _COffset: 0
     - _CRadius: 0.05
-    - _CScale: 5
-    - _CSmooth: 0.05
+    - _CScale: 2
+    - _CSmooth: 0.01
     - _CameraClosness: 0
     - _CameraOffset: 200
     - _ColorMask: 15
@@ -101,6 +101,10 @@ Material:
     - _Parallax: 0.02
     - _Radius: 0.05
     - _Reverse: 1
+    - _RimInt: 0.574
+    - _RimPow: 1
+    - _RimPower: 1.9
+    - _RimToggle: 1
     - _ShadowCull: 2
     - _Smooth: 0.02
     - _Smoothness: 0
@@ -122,3 +126,4 @@ Material:
     - _Color: {r: 1, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Factor: {r: 2, g: 1, b: 0, a: 0}
+    - _RimColor: {r: 0, g: 0, b: 0, a: 1}

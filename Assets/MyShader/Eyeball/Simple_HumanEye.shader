@@ -2,7 +2,6 @@
 {
     Properties
     {
-
         [Header(Section A)]
         [Space(5)]
         _AColor("Color", Color) = (1,1,1)
@@ -15,13 +14,17 @@
         _BSmooth("Smoothness", Range(0, 0.5))= 1
         _BScale("Scale", Range(0, 10))= 1
 
-
         [Space(5)]
         [Header(C)]
         _CColor("Color", Color) = (0,0,0)
         _CRadius("Radius", Range(0, 1))= .5
         _CSmooth("Smoothness", Range(0, .2))= .05
         _CScale("Scale", Range(0, 10))= 1
+
+        [Header(Rim)]
+        [Toggle] _RimToggle("Rim", Float) = 0
+        [HDR] _RimColor("Rim Color", Color) = (1,1,1,1)
+        _RimPower("Rim Power", Range(0,20)) = 1
 
     }
     SubShader
@@ -32,6 +35,7 @@
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile __ _RIMTOGGLE_ON
             
             #include "UnityCG.cginc"
 
@@ -39,6 +43,9 @@
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
+#if _RIMTOGGLE_ON
+                float3 normal: NORMAL;
+#endif
             };
 
             struct v2f
@@ -47,6 +54,10 @@
                 float2 uvA : TEXCOORD0;
                 float2 uvB : TEXCOORD1;
                 float2 uvC : TEXCOORD2;
+#if _RIMTOGGLE_ON
+                float4 rimColor : COLOR;
+#endif
+
             };
 
             // A Section
@@ -62,6 +73,11 @@
             float _CRadius, _CSmooth, _CScale;
             float4 _CColor;
 
+#if _RIMTOGGLE_ON
+            float _RimPower;
+            float4 _RimColor;
+#endif
+
             float circle (float2 p, float center, float radius, float smooth)
             {
                 float c = length(p - center) - radius;
@@ -75,12 +91,18 @@
                 o.uvA = TRANSFORM_TEX(v.uv, _MainTex);
                 o.uvB = v.uv;
                 o.uvC = v.uv;
+
+#if _RIMTOGGLE_ON
+                float3 worldNormal = UnityObjectToWorldNormal(v.normal);
+                float3 viewDir = normalize(WorldSpaceViewDir(v.vertex));
+                o.rimColor = pow(1- dot(viewDir, worldNormal), _RimPower);
+#endif
+
                 return o;
             }
             
             fixed4 frag (v2f i) : SV_TARGET
             {
-                
                 fixed4 col = _AColor * tex2D(_MainTex, i.uvA);
                 
                 i.uvB.x *= _BScale;
@@ -93,7 +115,13 @@
                 i.uvC.x += _CScale * -.25 + .5;
                 float cCircle = circle(i.uvC, .5, _CRadius, _CSmooth);
 
-                return lerp(col, _CColor, cCircle);
+                col = lerp(col, _CColor, cCircle);
+
+#if _RIMTOGGLE_ON
+                col = lerp(col, _RimColor, i.rimColor);
+#endif
+
+                return col;
             }
             ENDCG
         }

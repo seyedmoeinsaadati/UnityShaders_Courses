@@ -3,8 +3,8 @@
     Properties
     {
         _RimInt("Rim Intensity", Range(0, 1)) = 1
-        _RimPow("Rim Power", Range(1,5)) = 1
-        _RimColor("Rim Color", Color) = (1,1,1,1)
+        _RimPow("Rim Power", Range(1,20)) = 1
+        [HDR]_RimColor("Rim Color", Color) = (1,1,1,1)
     }
     SubShader
     {
@@ -41,9 +41,9 @@
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
-                float3 worldNormal = UnityObjectToWorldNormal(v.vertex);
+                float3 worldNormal = UnityObjectToWorldNormal(v.normal);
                 float3 viewDir = normalize(WorldSpaceViewDir(v.vertex));
-                o.rimColor = pow(1- max(0, dot(viewDir, worldNormal)), _RimPow);
+                o.rimColor = pow(1- dot(viewDir, worldNormal), _RimPow);
 
                 return o;
             }
