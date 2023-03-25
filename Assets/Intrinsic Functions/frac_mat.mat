@@ -77,7 +77,7 @@ Material:
     - _Radius: 0.25
     - _Rotation: 0
     - _Sections: 10
-    - _Size: 0.48
+    - _Size: 0.5
     - _Smooth: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
