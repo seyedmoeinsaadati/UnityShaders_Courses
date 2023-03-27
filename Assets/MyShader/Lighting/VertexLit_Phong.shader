@@ -34,7 +34,8 @@
             {
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
-                float4 color : COLOR;
+                float4 color : COLOR0;
+                float3 specularColor : COLOR1;
             };
 
             float4 _Color;
@@ -69,12 +70,12 @@
 
                 float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);
                 half3 diffuse = lambert_shading(_LightColor0.rgb, _LightInt, worldNormal, lightDir);
-                o.color.rgb *= diffuse;
+                o.color.rgb += diffuse;
                 
                 float3 viewDir = normalize(WorldSpaceViewDir(v.vertex)).xyz;
                 fixed3 specCol = _SpecularColor * _LightColor0.rgb;
                 half3 specular = specular_shading(specCol, _SpecularColor.a, worldNormal, lightDir, viewDir, _SpecularPow);
-                o.color.rgb += specular;
+                o.specularColor = specular;
                 
                 return o;
             }
@@ -82,7 +83,7 @@
             fixed4 frag (v2f i) : SV_Target
             {
                 fixed4 col = tex2D(_MainTex, i.uv) * _Color;
-                col.rgb += i.color;
+                col.rgb *= i.color.rgb + i.specularColor;
                 return col;
             }
             ENDCG
