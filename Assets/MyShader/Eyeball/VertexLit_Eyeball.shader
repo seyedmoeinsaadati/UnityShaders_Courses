@@ -1,4 +1,4 @@
-﻿Shader "Moein/Unlit/Eyeball/Eyeball"
+﻿Shader "Moein/VertexLit/Eyeball"
 {
     Properties
     {
