@@ -1,4 +1,4 @@
-﻿Shader "Moein/VertexLit/Eyeball"
+﻿Shader "Moein/Unlit/Eyeball"
 {
     Properties
     {
@@ -34,15 +34,6 @@
         [HDR] _RimColor("Rim Color", Color) = (1,1,1,1)
         _RimPower("Rim Power", Range(0,20)) = 1
 
-        [Space(5)]
-        [Header(_Lighting)]
-        [Space(5)]
-        _Ambient("Ambient Intensity", Range(0, 1)) = 1
-        _LightInt ("Light Intensity", Range(0, 1)) = 1
-        [HDR]
-        _SpecularColor("Specular Color", Color) = (1,1,1,1)
-        [PowerSlider(2.0)]_SpecularPow("Specular Power", Range(0.0, 1024.0)) = 64
-
     }
     SubShader
     {
@@ -76,33 +67,21 @@
                 return smoothstep(c - smooth, c, radius);
             }
 
-            float3 lambert_shading(float3 colorRefl, float lightInt, float3 normal, float3 lightDir)
-            {
-                return colorRefl * lightInt * max(0, dot(normal, lightDir));
-            }
-
-            float3 specular_shading(float3 colorRefl, float specularInt, float3 normal, float3 lightDir, float3 viewDir, float specularPow)
-            {
-                float3 h = normalize(lightDir + viewDir);
-                return colorRefl * specularInt * pow(max (0 , dot(normal, h)), specularPow);
-            }
-
             struct appdata
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
+#if _RIMTOGGLE_ON
                 float3 normal: NORMAL;
+#endif
             };
 
             struct v2f
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
-                float3 lightColor : COLOR0;
-                float3 specularColor : COLOR1;
-
 #if _RIMTOGGLE_ON
-                float4 rimColor : COLOR2;
+                float4 rimColor : COLOR0;
 #endif
 
             };
@@ -120,11 +99,6 @@
             float _CRadius, _CSmooth, _CScale;
             float4 _CColor;
 
-            float _Ambient;
-            float _LightInt;
-            float4 _SpecularColor;
-            float _SpecularPow;
-
 #if _RIMTOGGLE_ON
             float _RimPower;
             float4 _RimColor;
@@ -135,20 +109,9 @@
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
 
-                float3 worldNormal = UnityObjectToWorldNormal(v.normal);
-            
-                o.lightColor = UNITY_LIGHTMODEL_AMBIENT * _Ambient;
-
-                float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);
-                half3 diffuse = lambert_shading(_LightColor0.rgb, _LightInt, worldNormal, lightDir);
-                o.lightColor += diffuse;
-                
-                float3 viewDir = normalize(WorldSpaceViewDir(v.vertex)).xyz;
-                fixed3 specCol = _SpecularColor * _LightColor0.rgb;
-                half3 specular = specular_shading(specCol, _SpecularColor.a, worldNormal, lightDir, viewDir, _SpecularPow);
-                o.specularColor = specular;
-
 #if _RIMTOGGLE_ON
+                float3 worldNormal = UnityObjectToWorldNormal(v.normal);
+                float3 viewDir = normalize(WorldSpaceViewDir(v.vertex)).xyz;
                 o.rimColor = pow(1- dot(viewDir, worldNormal), _RimPower);
 #endif
 
@@ -166,7 +129,6 @@
                 // float r = length(uv) * 2;
                 // float a = atan(uv.y / uv.x);
                 // uv = float2(r, a);// * _ATextureTiling.z;
-
                 uv *= _ATexture_ST.xy;
                 uv +=  _ATexture_ST.zw;
                 fixed4 col = _AColor * tex2D(_ATexture, uv);
@@ -197,8 +159,6 @@
                 uv.x += _CScale * -.75 + .5;
                 float cCircle = circle(uv, .5, _CRadius, _CSmooth);
                 col = lerp(col, _CColor, cCircle);
-
-                col.rgb = col.rgb * i.lightColor.rgb + i.specularColor.rgb;
 #if _RIMTOGGLE_ON
                 col = lerp(col, _RimColor, i.rimColor);
 #endif
