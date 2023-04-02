@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ColorBalance_Advanced
-  m_Shader: {fileID: 4800000, guid: 7098653ac2b09f14cb2d9cc6f0b16fc3, type: 3}
+  m_Shader: {fileID: 4800000, guid: 26e2d178b8f9df14fb1d2034adfb5b67, type: 3}
   m_ShaderKeywords: _COLORMODE_ADD _COLORTOGGLE_ON _COLOR_TOGGLE_ON _CONTRASTTOGGLE_ON
     _MODE_MULTIPLY
   m_LightmapFlags: 4
