@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoUpdate: 1
-  material: {fileID: 2100000, guid: 4b1bfcbe099ea7f4e978e5e144d11e6f, type: 2}
+  material: {fileID: 2100000, guid: d97d98f51da8f2f47a040f40173cd3c0, type: 2}
 --- !u!81 &204523920
 AudioListener:
   m_ObjectHideFlags: 0
