@@ -5,6 +5,10 @@
         _Color("Color", Color) = (1,1,1,1)
         _MainTex ("Texture", 2D) = "white" {}
 
+        [Toggle] _EmissionToggle("Emission", Float) = 0
+        [HDR] _EmissionColor("Emission Color", Color) = (1,1,1,1)
+        _EmissionTex ("Texture", 2D) = "white" {}
+
         _Ambient("Ambient Intensity", Range(0, 1)) = 1
         _LightInt ("Light Intensity", Range(0, 1)) = 1
         [HDR]
@@ -20,8 +24,11 @@
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile __ _EMISSIONTOGGLE_ON
+
             #include "UnityCG.cginc"
             #include "UnityLightingCommon.cginc"
+            
 
             struct appdata
             {
@@ -41,6 +48,12 @@
             float4 _Color;
             sampler2D _MainTex;
             float4 _MainTex_ST;
+
+#if _EMISSIONTOGGLE_ON
+            float4 _EmissionColor;
+            sampler2D _EmissionTex;
+            float4 _EmissionTex_ST;
+#endif
         
             float _Ambient;
             float _LightInt;
@@ -84,6 +97,11 @@
             {
                 fixed4 col = tex2D(_MainTex, i.uv) * _Color;
                 col.rgb *= i.color.rgb + i.specularColor;
+
+#if _EMISSIONTOGGLE_ON
+                col.rgb += tex2D(_EmissionTex, i.uv) * _EmissionColor;
+#endif
+
                 return col;
             }
             ENDCG
