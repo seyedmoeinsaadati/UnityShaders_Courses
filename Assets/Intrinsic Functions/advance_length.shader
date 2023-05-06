@@ -5,8 +5,11 @@
         _Texture1 ("Texture 1", 2D) = "white" {}
         _Texture2 ("Texture 2", 2D) = "white" {}
         
-        _OffsetX ("Center", Range(0, 1)) = 0.5
-        _OffsetY ("Center", Range(0, 1)) = 0.5
+        _OffsetX ("Offset X", Range(0, 1)) = 0.5
+        _OffsetY ("Offset Y", Range(0, 1)) = 0.5
+
+        _ScaleX ("Scale X", Range(0, 10)) = 0.5
+        _ScaleY ("Scale Y", Range(0, 10)) = 0.5
 
         _Radius ("Radius", Range(0.0, 2)) = 0.3
         _Smooth ("Smooth", Range(0.0, 0.5)) = 0.01
@@ -41,6 +44,7 @@
             float _Smooth;
             float _Radius;
             float _OffsetX, _OffsetY;
+            float _ScaleX, _ScaleY;
 
             float circle (float2 p, float2 center, float radius, float smooth)
             {
@@ -62,7 +66,7 @@
             {
                 half4 col1 = tex2D(_Texture1, i.uv);
                 half4 col2 = tex2D(_Texture2, i.uv);
-                float t = circle(i.uv, float2(_OffsetX, _OffsetY), _Radius, _Smooth);
+                float t = circle(i.uv * float2(_ScaleX, _ScaleY), float2(_OffsetX, _OffsetY), _Radius, _Smooth);
                 fixed4 col = lerp(col1, col2, t);
                 return fixed4(col.rgb, 1);
             }
