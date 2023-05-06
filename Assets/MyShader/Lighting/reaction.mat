@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: phong_mat
-  m_Shader: {fileID: 4800000, guid: 7bdb86f7925d7f84d8787b6220fb3226, type: 3}
+  m_Name: reaction
+  m_Shader: {fileID: 4800000, guid: cb479e0570fcb854f83ac4cd1f712cd8, type: 3}
   m_ShaderKeywords: _EMISSIONTOGGLE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -40,8 +40,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionTex:
-        m_Texture: {fileID: 2800000, guid: 8e44fe896458128418bff33ed3981421, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 77bfdea78a338984ebbc6437b6028915, type: 3}
+        m_Scale: {x: 4, y: 4}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 1565fb633afddfc48975d15136d878ad, type: 3}
@@ -62,6 +62,7 @@ Material:
     m_Floats:
     - _Ambient: 1
     - _BumpScale: 1
+    - _Center: 0.5
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -74,6 +75,8 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _Radius: 0.113
+    - _Smooth: 0.25
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SpecularInt: 1
