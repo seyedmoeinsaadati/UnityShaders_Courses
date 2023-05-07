@@ -81,12 +81,12 @@ Material:
     - _MirrorOnBack: 1
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OffsetX: 0.5
-    - _OffsetY: 0.5
+    - _OffsetX: 1
+    - _OffsetY: 1
     - _Parallax: 0.02
-    - _Radius: 1.36
-    - _Rotation: 10
-    - _Smooth: 0.048
+    - _Radius: 0.36
+    - _Rotation: 90
+    - _Smooth: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
