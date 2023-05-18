@@ -49,22 +49,10 @@
             #include "UnityCG.cginc"
             #include "UnityLightingCommon.cginc"
 
-             float circle(float2 p, float center, float radius, float smooth)
+             float circle(float2 p, float center, float radius, float smoothIn, float smoothOut)
             {
                 float c = length(p - center) - radius;
-                return smoothstep(c - smooth, c + smooth, radius);
-            }
-
-            float inCircle(float2 p, float center, float radius, float smooth)
-            {
-                float c = length(p - center) - radius;
-                return smoothstep(c, c + smooth, radius);
-            }
-
-            float outCircle(float2 p, float center, float radius, float smooth)
-            {
-                float c = length(p - center) - radius;
-                return smoothstep(c - smooth, c, radius);
+                return smoothstep(c - smoothOut, c + smoothIn, radius);
             }
 
             struct appdata
@@ -137,11 +125,11 @@
                 uv.x *= _BScale;
                 uv.x += _BScale * -.75 + .5;
 
-                float bCircle = outCircle(uv, .5, _BRadius, _BOutSmooth);
+                float bCircle = circle(uv, .5, _BRadius, 0, _BOutSmooth);
                 col = lerp(col, _BOutColor, bCircle);
                 bCircle = circle(uv, .5, _BRadius, 0);
                 col = lerp(col, _BTintColor, bCircle);
-                bCircle = inCircle(uv, .5, _BRadius, _BInSmooth);
+                bCircle = circle(uv, .5, _BRadius, _BInSmooth, 0);
 
                 // mapping texture on sphere
                 uv = i.uv;

@@ -1,23 +1,28 @@
-﻿Shader "Moein/Skybox/LerpSkyBox (Circle)" {
+﻿Shader "Moein/Unlit/Lerp (Circle)" {
 Properties {
 
-    [NoScaleOffset] _Texture1 ("Texture 1", 2D) = "grey" {}
-    [NoScaleOffset] _Texture2 ("Texture 2", 2D) = "grey" {}
+    _Texture1 ("Texture 1", 2D) = "white" {}
+    _Texture2 ("Texture 2", 2D) = "black" {}
 
-    [Gamma] _Exposure ("Exposure", Range(0, 8)) = 1.0
     _Tint ("Tint Color", Color) = (.5, .5, .5, .5)
     _Rotation ("Rotation", Range(0, 360)) = 0
-
+    [Gamma] _Exposure ("Exposure", Range(0, 8)) = 1.0
+     
     [Header(Circle)]
     [Space(10)]
+
     _Radius ("Radius", Float) = 1
     _Tiling("Scale(xy), Offset (zw)", Vector) = (5,2.5,0,0)
     _Smooth ("Smooth", Range(0.0, 0.5)) = 0.01
+
+    [Enum(UnityEngine.Rendering.CullMode)]
+    _Cull("Cull", Float) = 0
 }
 
 SubShader {
-    Tags { "Queue"="Background" "RenderType"="Background" "PreviewType"="Skybox" }
-    Cull Off ZWrite Off
+    Tags { "Queue"="Opaque" "RenderType"="Opaque" }
+    Cull [_Cull] 
+  
 
     Pass {
 
@@ -38,8 +43,10 @@ SubShader {
 
         float _Smooth;
         float _Radius;
-        float4 _Tiling;
+        float _OffsetX, _OffsetY;
 
+
+        float4 _Tiling;
         half4 _Tint;
         half _Exposure;
         float _Rotation, _Lerp;
@@ -72,7 +79,7 @@ SubShader {
             return smoothstep(c - smooth, c + smooth, radius);
         }
 
-        struct appdata_t {
+        struct appdata {
             float4 vertex : POSITION;
             float2 uv : TEXCOORD0;
             UNITY_VERTEX_INPUT_INSTANCE_ID
@@ -85,11 +92,10 @@ SubShader {
             UNITY_VERTEX_OUTPUT_STEREO
         };
 
-        v2f vert (appdata_t v)
+        v2f vert (appdata v)
         {
             v2f o;
-            UNITY_SETUP_INSTANCE_ID(v);
-            UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
+            
             float3 rotated = RotateAroundYInDegrees(v.vertex, _Rotation);
             o.vertex = UnityObjectToClipPos(rotated);
             o.uv = v.uv;
@@ -100,9 +106,8 @@ SubShader {
 
         fixed4 frag (v2f i) : SV_Target
         {
-
             float2 tc = ToRadialCoords(i.texcoord);
-            
+                    
             half4 col1 = tex2D(_Texture1, tc);
             half4 col2 = tex2D(_Texture2, tc);
 
@@ -113,9 +118,7 @@ SubShader {
             float t = circle(tc, _Tiling.zw, _Radius, _Smooth);
             t = i.texcoord.z > _Tiling.w ? 1 : 0;
             half3 c = lerp(col1, col2, t);
-            
 
-            
             c = c * _Tint.rgb * unity_ColorSpaceDouble.rgb;
             c *= _Exposure;
             return half4(c, 1);

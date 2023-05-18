@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: skybox_lerp_circle
-  m_Shader: {fileID: 4800000, guid: 6fa8041d0e9d03140b3b68c5215d11ff, type: 3}
+  m_Name: object_lerp_circle
+  m_Shader: {fileID: 4800000, guid: 764ec59f5a87e9043b93808c9e7c07d0, type: 3}
   m_ShaderKeywords: _MAPPING_LATITUDE_LONGITUDE _MAPPING_LATITUDE_LONGITUDE_LAYOUT
     _MIRRORONBACK_ON
   m_LightmapFlags: 4
@@ -57,19 +57,20 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture1:
-        m_Texture: {fileID: 2800000, guid: e5c0a538926158140bb02663f9eede28, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5b5f057d987110d4a998fb54de8e7156, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2:
-        m_Texture: {fileID: 2800000, guid: a8afdc431207d4847bacf2a116cfd9e1, type: 3}
+        m_Texture: {fileID: 2800000, guid: b18c6e0c0cfdb0b4baa8ef898c023019, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
+    - _Cull: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Exposure: 1
+    - _Exposure: 0.5
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -81,12 +82,12 @@ Material:
     - _MirrorOnBack: 1
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OffsetX: 0.51
-    - _OffsetY: 0
+    - _OffsetX: 0
+    - _OffsetY: 0.14
     - _Parallax: 0.02
-    - _Radius: 45.4
-    - _Rotation: 0
-    - _Smooth: 0.1
+    - _Radius: 14.3
+    - _Rotation: 184
+    - _Smooth: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -95,5 +96,5 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Tiling: {r: 0.1, g: 200, b: 0, a: 0}
-    - _Tint: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
+    - _Tiling: {r: 200, g: 538.6, b: 0, a: 0.5}
+    - _Tint: {r: 1, g: 1, b: 1, a: 1}
