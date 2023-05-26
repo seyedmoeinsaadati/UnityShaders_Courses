@@ -10,7 +10,7 @@ Properties {
 
     [Space(10)]
     _Lerp ("Threshold", Range(-1, 1)) = 0.01
-    _Smoothnessness ("Smoothness", Range(0.0, 0.5)) = 0.01
+    _Smoothness ("Smoothness", Range(0.0, 0.5)) = 0.01
     
 }
 
