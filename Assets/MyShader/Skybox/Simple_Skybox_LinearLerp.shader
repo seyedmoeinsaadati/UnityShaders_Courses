@@ -1,4 +1,4 @@
-﻿Shader "Moein/Skybox/LerpSkyBox (Circle)" {
+﻿Shader "Moein/Skybox/Panoramic_LinearLerp" {
 Properties {
 
     [NoScaleOffset] _Texture1 ("Texture 1", 2D) = "grey" {}
@@ -8,11 +8,10 @@ Properties {
     _Tint ("Tint Color", Color) = (.5, .5, .5, .5)
     _Rotation ("Rotation", Range(0, 360)) = 0
 
-    [Header(Circle)]
     [Space(10)]
-    _Radius ("Radius", Float) = 1
-    _Tiling("Scale(xy), Offset (zw)", Vector) = (5,2.5,0,0)
-    _Smooth ("Smooth", Range(0.0, 0.5)) = 0.01
+    _Lerp ("Threshold", Range(-1, 1)) = 0.01
+    _Smoothnessness ("Smoothness", Range(0.0, 0.5)) = 0.01
+    
 }
 
 SubShader {
@@ -36,7 +35,7 @@ SubShader {
         float4 _Texture2_TexelSize;
         half4 _Texture2_HDR;
 
-        float _Smooth;
+        float _Smoothnessness;
         float _Radius;
         float4 _Tiling;
 
@@ -66,12 +65,6 @@ SubShader {
             return float3(mul(m, vertex.xz), vertex.y).xzy;
         }
 
-        float circle (float2 p, float2 center, float radius, float smooth)
-        {
-            float c = length(p - center) - radius;
-            return smoothstep(c - smooth, c + smooth, radius);
-        }
-
         struct appdata_t {
             float4 vertex : POSITION;
             float2 uv : TEXCOORD0;
@@ -79,7 +72,8 @@ SubShader {
         };
 
         struct v2f {
-            float4 vertex : SV_POSITION;
+            float4 vertex : POSITION0;
+            float4 position : POSITION1;
             float2 uv : TEXCOORD0;
             float3 texcoord : TEXCOORD12;
             UNITY_VERTEX_OUTPUT_STEREO
@@ -91,6 +85,7 @@ SubShader {
             UNITY_SETUP_INSTANCE_ID(v);
             UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
             float3 rotated = RotateAroundYInDegrees(v.vertex, _Rotation);
+            o.position = v.vertex;
             o.vertex = UnityObjectToClipPos(rotated);
             o.uv = v.uv;
             o.texcoord = v.vertex.xyz;
@@ -100,22 +95,14 @@ SubShader {
 
         fixed4 frag (v2f i) : SV_Target
         {
-
             float2 tc = ToRadialCoords(i.texcoord);
             
             half4 col1 = tex2D(_Texture1, tc);
             half4 col2 = tex2D(_Texture2, tc);
 
-            tc *= _Tiling.xy;
-            tc.x += _Tiling.x * -.5;
-            tc.y += _Tiling.y * -.5;
-
-            float t = circle(tc, _Tiling.zw, _Radius, _Smooth);
-            t = i.texcoord.z > _Tiling.w ? 1 : 0;
+            float t = smoothstep( i.position.x - _Smoothnessness, i.position.x + _Smoothnessness, _Lerp);
             half3 c = lerp(col1, col2, t);
-            
 
-            
             c = c * _Tint.rgb * unity_ColorSpaceDouble.rgb;
             c *= _Exposure;
             return half4(c, 1);
