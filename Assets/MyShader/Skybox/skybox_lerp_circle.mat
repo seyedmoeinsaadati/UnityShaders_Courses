@@ -75,7 +75,7 @@ Material:
     - _GlossyReflections: 1
     - _ImageType: 0
     - _Layout: 2
-    - _Lerp: -0.68
+    - _Lerp: 1
     - _Mapping: 1
     - _Metallic: 0
     - _MirrorOnBack: 1

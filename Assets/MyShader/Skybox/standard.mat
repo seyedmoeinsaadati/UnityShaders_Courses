@@ -62,12 +62,12 @@ Material:
     - _DstBlend: 0
     - _Exposure: 1
     - _GlossMapScale: 1
-    - _Glossiness: 0.5
+    - _Glossiness: 1
     - _GlossyReflections: 1
     - _ImageType: 0
     - _Layout: 0
     - _Mapping: 1
-    - _Metallic: 0
+    - _Metallic: 1
     - _MirrorOnBack: 0
     - _Mode: 0
     - _OcclusionStrength: 1
