@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: vertexlit_plasma
-  m_Shader: {fileID: 4800000, guid: cac0271ee9c31a542a7d941577850f25, type: 3}
+  m_Name: VertexLit_NormalMoving
+  m_Shader: {fileID: 4800000, guid: a16aa1731155017438a97be0c0664f9f, type: 3}
   m_ShaderKeywords: _ADDITIONALTILE_NONE _AMBIENT_ON _REVERSE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -20,21 +20,26 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b58bc568e6f1ee246bfd946b3387b4ec, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0e00f0662bcf15c4e97df996cbc59e8c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Ambient: 0.404
+    - _Ambient: 1
     - _AmbientInt: 0.803
-    - _LightInt: 1
-    - _Plasma: 0.02
-    - _Scale1: 5
-    - _Scale2: 5
-    - _Scale3: 0
-    - _Scale4: 0
-    - _Speed: 1
+    - _LightInt: 0
+    - _Offset: 0.3
+    - _Plasma: 10
+    - _Scale1: 50
+    - _Scale2: 50
+    - _Scale3: 50
+    - _Scale4: 50
+    - _Speed: 10
+    - _Weight: 0
+    - _Wieght: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Direction: {r: 0, g: 1, b: 0, a: 0}
     - _LightColorX: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 1}
     - _LightColorY: {r: 1, g: 1, b: 1, a: 1}
     - _LightColorZ: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
+    - _SecondColor: {r: 1367.1202, g: 0, b: 0, a: 1}
