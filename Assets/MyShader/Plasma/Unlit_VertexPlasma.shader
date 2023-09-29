@@ -10,7 +10,7 @@
         [Header(Plasma Fields)]
         [Space(10)]
         _Speed("Speed", Float) = 10
-        _Plasma("Wieght", Range(0, 1)) = 10
+        _Plasma("Wieght", Range(0, 1)) = 1
 		_Scale1("Vertical Scale", Float) = 2
 		_Scale2("Horizontal Scale", Float) = 2
 		_Scale3("Diagonal Scale", Float) = 2

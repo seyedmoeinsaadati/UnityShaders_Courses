@@ -20,26 +20,26 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 0e00f0662bcf15c4e97df996cbc59e8c, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Ambient: 1
+    - _Ambient: 0.269
     - _AmbientInt: 0.803
-    - _LightInt: 0
-    - _Offset: 0.3
+    - _LightInt: 0.768
+    - _Offset: 0
     - _Plasma: 10
     - _Scale1: 50
     - _Scale2: 50
     - _Scale3: 50
     - _Scale4: 50
     - _Speed: 10
-    - _Weight: 0
+    - _Weight: 0.048
     - _Wieght: 0
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Direction: {r: 0, g: 1, b: 0, a: 0}
+    - _Color: {r: 0.7362522, g: 1, b: 0, a: 1}
+    - _Direction: {r: 1, g: 0, b: 0, a: 0}
     - _LightColorX: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 1}
     - _LightColorY: {r: 1, g: 1, b: 1, a: 1}
     - _LightColorZ: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
-    - _SecondColor: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 1}
+    - _SecondColor: {r: 0.7362522, g: 1, b: 0, a: 1}

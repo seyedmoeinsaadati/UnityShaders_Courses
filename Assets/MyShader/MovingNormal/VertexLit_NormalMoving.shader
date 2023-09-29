@@ -1,4 +1,4 @@
-﻿Shader "Moein/VertexLit/Normal Moving"
+﻿Shader "Moein/VertexLit/Annihilation"
 {
     Properties
     {
@@ -118,7 +118,6 @@
                 }
             }
 
-            
             half4 frag(g2f i) : COLOR
             {
                 float4 col = tex2D(_MainTex, i.uv) * _Color;
