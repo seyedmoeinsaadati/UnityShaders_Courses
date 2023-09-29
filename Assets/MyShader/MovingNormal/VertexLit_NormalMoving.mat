@@ -42,4 +42,4 @@ Material:
     - _LightColorX: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 1}
     - _LightColorY: {r: 1, g: 1, b: 1, a: 1}
     - _LightColorZ: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
-    - _SecondColor: {r: 1367.1202, g: 0, b: 0, a: 1}
+    - _SecondColor: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 1}

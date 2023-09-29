@@ -123,7 +123,7 @@
             {
                 float4 col = tex2D(_MainTex, i.uv) * _Color;
                 col.rgb *= i.color;
-                col.rgb += (_Weight / 100 * _SecondColor);
+                col.rgb += (_Weight * _SecondColor);
                 return col;
             }
 
