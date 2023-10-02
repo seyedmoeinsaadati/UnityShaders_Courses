@@ -77,7 +77,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Lerp: 0.34
+    - _Lerp: -0.18
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -87,7 +87,7 @@ Material:
     - _Rotation: 0
     - _Sections: 10
     - _Smooth: 0
-    - _Smoothness: 0.053
+    - _Smoothness: 0.029
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

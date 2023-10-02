@@ -24,9 +24,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Ambient: 0.269
+    - _Ambient: 0.7
     - _AmbientInt: 0.803
-    - _LightInt: 0.768
+    - _LightInt: 1
     - _Offset: 0
     - _Plasma: 10
     - _Scale1: 50
@@ -34,12 +34,12 @@ Material:
     - _Scale3: 50
     - _Scale4: 50
     - _Speed: 10
-    - _Weight: 0.048
+    - _Weight: 0
     - _Wieght: 0
     m_Colors:
-    - _Color: {r: 0.7362522, g: 1, b: 0, a: 1}
-    - _Direction: {r: 1, g: 0, b: 0, a: 0}
+    - _Color: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 1}
+    - _Direction: {r: 0, g: 0.2, b: 0, a: 0}
     - _LightColorX: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 1}
     - _LightColorY: {r: 1, g: 1, b: 1, a: 1}
     - _LightColorZ: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
-    - _SecondColor: {r: 0.7362522, g: 1, b: 0, a: 1}
+    - _SecondColor: {r: 0, g: 0, b: 0, a: 1}
