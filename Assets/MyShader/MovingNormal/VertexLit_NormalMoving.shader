@@ -70,8 +70,9 @@
             {
                 v2g o;
 
-                float4 worldVertexPos = mul(unity_ObjectToWorld, v.vertex);
+                float3 worldVertexPos = mul(unity_ObjectToWorld, v.vertex).xyz;
                 float3 worldVector = worldVertexPos - _Anchor.xyz;
+
                 float len = length(worldVector);
                 o.affectedWeight = 1 - smoothstep(_Radius, _Radius * 2, len);
 
