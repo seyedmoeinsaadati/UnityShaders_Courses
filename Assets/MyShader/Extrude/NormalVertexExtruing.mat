@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: VertexExtruing
-  m_Shader: {fileID: 4800000, guid: 8c71f9d2c5f9adb458982333f41cea40, type: 3}
+  m_Name: NormalVertexExtruing
+  m_Shader: {fileID: 4800000, guid: 09d1e4f3a5cdb364db07112b35073371, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -57,7 +57,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Ambient: 1
-    - _Amount: 1
+    - _Amount: 0
     - _BumpScale: 1
     - _CameraOffset: 0.05
     - _Cutoff: 0.5
@@ -73,7 +73,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Radius: 5
+    - _Radius: 0
     - _Reverse: 0
     - _Rim: 0
     - _RimInt: 1
@@ -88,7 +88,7 @@ Material:
     - _mySlider: 2.31
     - _myStripWidth: 1
     m_Colors:
-    - _Anchor: {r: 8.07, g: 0, b: 0, a: 0}
+    - _Anchor: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DepthColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

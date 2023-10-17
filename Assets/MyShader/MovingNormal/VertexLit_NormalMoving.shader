@@ -13,6 +13,9 @@
         _Weight("Weight", Range(0, 1)) = 1
         _Direction("Addictive Direction", Vector) = (0,0,0,0)
         [HDR]_SecondColor("Second Color", Color) = (1,1,1,1)
+
+        _Radius("Radius", Float) = 0
+        _Anchor("Anchor", Vector) = (0, 0, 0, 0)
     }
     SubShader
     {
@@ -42,6 +45,7 @@
                 float2 uv : TEXCOORD0;
                 float3 vertex : TEXCOORD1;
                 float3 color : TEXCOORD2;
+                float affectedWeight : BLENDWEIGHT;
             };
 
             struct g2f
@@ -58,15 +62,22 @@
             float _Ambient;
             float _LightInt;
 
-			float _Offset, _Weight;
-            float4 _Direction;
+			float _Offset, _Weight, _Radius;
+            float4 _Direction, _Anchor;
             float4 _SecondColor;
 
             v2g vert (appdata v)
             {
                 v2g o;
 
-                v.vertex.xyz += v.normal * _Offset * _Weight;
+                float4 worldVertexPos = mul(unity_ObjectToWorld, v.vertex);
+                float3 worldVector = worldVertexPos - _Anchor.xyz;
+                float len = length(worldVector);
+                o.affectedWeight = 1 - smoothstep(_Radius, _Radius * 2, len);
+
+                v.vertex.xyz += v.normal * (_Offset * o.affectedWeight * _Weight);
+                // v.vertex.xyz += v.normal * _Offset * _Weight;
+
                 v.vertex.xyz += _Direction.xyz * _Weight;
                 o.vertex = v.vertex;
 
@@ -88,28 +99,11 @@
             void geom(triangle v2g IN[3], inout TriangleStream<g2f> tristream)
             {
                 g2f o;
-
-                // Compute the normal
-                // float3 vecA = IN[1].vertex - IN[0].vertex;
-                // float3 vecB = IN[2].vertex - IN[0].vertex;
-                // float3 normal = cross(vecA, vecB);
-                // normal = normalize(mul(normal, (float3x3) unity_WorldToObject));
-
-                // Compute diffuse light
-                // float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);
-                // o.color = _LightColor0 * max(0., dot(normal, lightDir));
-
-                // custom lighting ????
-                // o.color += max(0., dot(normal, (0,0,.1)));
-
-                // Compute barycentric uv
-                // o.uv = (IN[0].uv + IN[1].uv + IN[2].uv) / 3;
-
                
                 float3 center = (IN[0].vertex + IN[1].vertex + IN[2].vertex) / 3;
                 for (int i = 0; i < 3; i++)
                 {
-                    float3 pos = IN[i].vertex.xyz * ( 1 -_Weight) + (center.xyz * _Weight);
+                    float3 pos = IN[i].vertex.xyz * (1 - _Weight) * IN[i].affectedWeight + (center.xyz * _Weight);
                     IN[i].vertex = pos;
                     o.pos = UnityObjectToClipPos(IN[i].vertex);
                     o.color = IN[i].color;

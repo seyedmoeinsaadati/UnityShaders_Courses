@@ -34,11 +34,7 @@
                 float len = length(worldVector);
 
                 float weight = 1 - smoothstep(_Radius, _Radius * 2, len);
-                v.vertex.xyz += v.normal * weight * _Amount;
-
-                // float playerToVertexDist = 1 - saturate(length(worldVertexPos - _Anchor.xyz));
-                // v.vertex.xyz += playerToVertexDist * weight;
-                // v.vertex.xyz += v.normal * weight;
+                v.vertex.xyz += worldVector * weight * _Amount;
 			}
 
 			sampler2D _MainTex;
