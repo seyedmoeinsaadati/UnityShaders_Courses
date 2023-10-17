@@ -27,7 +27,7 @@ Material:
     - _Ambient: 0.404
     - _AmbientInt: 0.803
     - _LightInt: 1
-    - _Plasma: 0.02
+    - _Plasma: 0.092
     - _Scale1: 5
     - _Scale2: 5
     - _Scale3: 0

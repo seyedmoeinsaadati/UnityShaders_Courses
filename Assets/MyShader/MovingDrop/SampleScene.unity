@@ -148,7 +148,7 @@ Material:
     - _Ambient: 0.5
     - _AmbientInt: 0.803
     - _LightInt: 1
-    - _Plasma: 0.1
+    - _Plasma: 0.189
     - _Scale1: 5
     - _Scale2: 5
     - _Scale3: 10
@@ -156,7 +156,7 @@ Material:
     - _Speed: 5
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Direction: {r: 0, g: 0, b: 0, a: 0}
+    - _Direction: {r: 1.39, g: 0, b: 0, a: 0}
     - _LightColorX: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 1}
     - _LightColorY: {r: 1, g: 1, b: 1, a: 1}
     - _LightColorZ: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}

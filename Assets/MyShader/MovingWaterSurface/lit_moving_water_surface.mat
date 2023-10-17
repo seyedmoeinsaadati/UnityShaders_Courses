@@ -28,12 +28,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Amplitude: 0.62
+    - _Amplitude: 0.41
     - _Amplitude1: 1
     - _Amplitude2: 1
     - _Amplitude3: 1
     - _Center: 0.5
-    - _MovingSpeedX: 1
+    - _MovingSpeedX: 10
     - _MovingSpeedX1: 0
     - _MovingSpeedX2: 0
     - _MovingSpeedX3: 0
@@ -42,20 +42,20 @@ Material:
     - _MovingSpeedZ2: 0
     - _MovingSpeedZ3: 0
     - _NormalFactor: 0
-    - _Radius: 0.01
+    - _Radius: 0.347
     - _Radius1: 0.3
     - _Radius2: 0.3
     - _Radius3: 0.3
-    - _Smooth: 0.37
+    - _Smooth: 0.5
     - _Smooth1: 0.01
     - _Smooth2: 0.01
     - _Smooth3: 0.01
-    - _WavePower: 2
+    - _WavePower: 1.56
     - _WavePower1: 1
     - _WavePower2: 1
     - _WavePower3: 1
     m_Colors:
-    - _Color: {r: 0, g: 0.53984463, b: 0.7169812, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _CustomLightColor: {r: 1, g: 0, b: 0, a: 1}
     - _CustomLightDir: {r: 0, g: 0, b: 0, a: 1}
     - _LColor: {r: 1, g: 0.4198113, b: 0.4198113, a: 1}

@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: VertexLit_Depth
   m_Shader: {fileID: 4800000, guid: 87c6a0570edf6d1419300145a6ff8639, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: _RIM_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -58,23 +58,23 @@ Material:
     m_Floats:
     - _Ambient: 0
     - _BumpScale: 1
-    - _CameraOffset: 1
+    - _CameraOffset: 0.3
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LightInt: 0.1
+    - _LightInt: 0
     - _Mask: 8
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Reverse: 0
-    - _Rim: 0
+    - _Rim: 1
     - _RimInt: 1
-    - _RimPow: 3.6
+    - _RimPow: 12.9
     - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -85,8 +85,8 @@ Material:
     - _mySlider: 2.31
     - _myStripWidth: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.9622642, g: 0.9622642, b: 0.9622642, a: 1}
     - _DepthColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SurfaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _RimColor: {r: 90.50967, g: 90.50967, b: 90.50967, a: 1}
+    - _SurfaceColor: {r: 1, g: 0.023584902, b: 0.023584902, a: 1}
