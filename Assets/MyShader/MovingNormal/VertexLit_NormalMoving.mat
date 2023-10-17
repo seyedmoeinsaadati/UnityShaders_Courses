@@ -24,12 +24,13 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Ambient: 0
+    - _Ambient: 0.346
     - _AmbientInt: 0.803
+    - _FUCK: 1
     - _LightInt: 1
     - _Offset: 0.2
     - _Plasma: 10
-    - _Radius: 0.2
+    - _Radius: -0.01
     - _Scale1: 50
     - _Scale2: 50
     - _Scale3: 50
@@ -39,7 +40,7 @@ Material:
     - _Wieght: 0
     m_Colors:
     - _Anchor: {r: 0, g: 1.6, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 0, b: 0, a: 1}
     - _Direction: {r: 0, g: 0, b: 0, a: 0}
     - _LightColorX: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 1}
     - _LightColorY: {r: 1, g: 1, b: 1, a: 1}

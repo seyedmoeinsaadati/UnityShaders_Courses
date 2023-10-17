@@ -100,10 +100,12 @@
             {
                 g2f o;
                
-                float3 center = (IN[0].vertex + IN[1].vertex + IN[2].vertex) / 3;
+                float3 center = ((IN[0].vertex + IN[1].vertex + IN[2].vertex) / 3);
                 for (int i = 0; i < 3; i++)
                 {
-                    float3 pos = IN[i].vertex.xyz * (1 - _Weight) * IN[i].affectedWeight + (center.xyz * _Weight);
+                    float3 pos = IN[i].vertex.xyz * (1 - _Weight * IN[i].affectedWeight) + (center.xyz * _Weight * IN[i].affectedWeight);
+                    //float3 pos = IN[i].vertex.xyz * (1 - _Weight) + (center.xyz * _Weight);
+                    
                     IN[i].vertex = pos;
                     o.pos = UnityObjectToClipPos(IN[i].vertex);
                     o.color = IN[i].color;
