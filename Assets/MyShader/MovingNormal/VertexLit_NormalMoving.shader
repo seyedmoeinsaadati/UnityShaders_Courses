@@ -1,4 +1,6 @@
-﻿Shader "Moein/VertexLit/Annihilation"
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
+Shader "Moein/VertexLit/Annihilation"
 {
     Properties
     {
@@ -72,7 +74,6 @@
 
                 float3 worldVertexPos = mul(unity_ObjectToWorld, v.vertex).xyz;
                 float3 worldVector = worldVertexPos - _Anchor.xyz;
-
                 float len = length(worldVector);
                 o.affectedWeight = 1 - smoothstep(_Radius, _Radius * 2, len);
 
