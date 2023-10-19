@@ -1,6 +1,4 @@
-﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
-
-Shader "Moein/VertexLit/Annihilation"
+﻿Shader "Moein/VertexLit/Annihilation"
 {
     Properties
     {
@@ -36,16 +34,15 @@ Shader "Moein/VertexLit/Annihilation"
 
             struct appdata
             {
-                float3 vertex : POSITION;
+                float4 vertex : POSITION;
                 float3 normal : NORMAL;
                 float2 uv : TEXCOORD0;
             };
 
             struct v2g
             {
-                float4 pos : SV_POSITION;
+                float4 pos : POSITION;
                 float2 uv : TEXCOORD0;
-                float3 vertex : TEXCOORD1;
                 float3 color : TEXCOORD2;
                 float affectedWeight : BLENDWEIGHT;
             };
@@ -72,18 +69,15 @@ Shader "Moein/VertexLit/Annihilation"
             {
                 v2g o;
 
-                float3 worldVertexPos = mul(unity_ObjectToWorld, v.vertex).xyz;
+                float4 worldVertexPos = mul(unity_ObjectToWorld, v.vertex);
                 float3 worldVector = worldVertexPos - _Anchor.xyz;
                 float len = length(worldVector);
                 o.affectedWeight = 1 - smoothstep(_Radius, _Radius * 2, len);
 
                 v.vertex.xyz += v.normal * (_Offset * o.affectedWeight * _Weight);
-                // v.vertex.xyz += v.normal * _Offset * _Weight;
-
                 v.vertex.xyz += _Direction.xyz * _Weight;
-                o.vertex = v.vertex;
 
-                o.pos = UnityObjectToClipPos(v.vertex);
+                o.pos = v.vertex;
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 
                 // lighing
@@ -102,21 +96,18 @@ Shader "Moein/VertexLit/Annihilation"
             {
                 g2f o;
                
-                float3 center = ((IN[0].vertex + IN[1].vertex + IN[2].vertex) / 3);
+                float3 center = ((IN[0].pos + IN[1].pos + IN[2].pos) / 3);
                 for (int i = 0; i < 3; i++)
                 {
-                    float3 pos = IN[i].vertex.xyz * (1 - _Weight * IN[i].affectedWeight) + (center.xyz * _Weight * IN[i].affectedWeight);
-                    //float3 pos = IN[i].vertex.xyz * (1 - _Weight) + (center.xyz * _Weight);
-                    
-                    IN[i].vertex = pos;
-                    o.pos = UnityObjectToClipPos(IN[i].vertex);
+                    float3 pos = IN[i].pos.xyz * (1 - _Weight * IN[i].affectedWeight) + (center.xyz * _Weight * IN[i].affectedWeight);                    
+                    o.pos = UnityObjectToClipPos(pos.xyz);
                     o.color = IN[i].color;
                     o.uv = IN[i].uv;
                     tristream.Append(o);
                 }
             }
 
-            half4 frag(g2f i) : COLOR
+            fixed4 frag(g2f i) : SV_Target
             {
                 float4 col = tex2D(_MainTex, i.uv) * _Color;
                 col.rgb *= i.color;

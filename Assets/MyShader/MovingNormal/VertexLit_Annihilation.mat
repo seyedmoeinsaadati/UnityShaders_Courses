@@ -30,13 +30,13 @@ Material:
     - _LightInt: 1
     - _Offset: 0.2
     - _Plasma: 10
-    - _Radius: -0.01
+    - _Radius: 0.2
     - _Scale1: 50
     - _Scale2: 50
     - _Scale3: 50
     - _Scale4: 50
     - _Speed: 10
-    - _Weight: 0
+    - _Weight: 0.306
     - _Wieght: 0
     m_Colors:
     - _Anchor: {r: 0, g: 1.6, b: 0, a: 0}
