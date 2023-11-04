@@ -1,4 +1,4 @@
-﻿Shader "Moein/VertexLit/Surface_Sin"
+﻿Shader "Moein/VertexLit/Surface_Circle"
 {
     // SinCos   (t/8 , t/4, t/2, t  )
     // time     (t/20, t  , t*2, t*3)
@@ -10,12 +10,13 @@
         [Space]
         _VertexThreshold("Vertex Thereshold", Float) = .0
 
-        _Power("Vertex Amplitude", float) = 1
+        _Power("Vertex Power", Range(0, 2)) = 1
         _Amplitude("Wave Amplitude", Float) = 1
-        _Frequence("Wave Frequence", Float) = 1
 
-        [KeywordEnum(X, Y, Z)] _Axis("Moving Axis", Float) = 1  
-        _MovingSpeed("Moving Speed", Float) = 0
+        _Smooth ("Smoothness", Range(0.0, 0.5)) = 0.01
+        _Radius ("Radius", Range(0.0, 0.5)) = 0.3
+        _MovingSpeedX("Moving Speed X", Float) = 0
+        _MovingSpeedZ("Moving Spedd Y", Float) = 0
                 
     }
     SubShader
@@ -62,31 +63,20 @@
             float4 _MainTex_ST;
 
             float _VertexThreshold;
-            float _Power, _Amplitude, _Frequence;
-            float _MovingSpeed;
+            float _Power, _Amplitude, _Radius, _Smooth;
+            float _MovingSpeedX, _MovingSpeedZ;
 
             v2g vert (appdata v)
             {
                 v2g o;
-
-	            float t = _Time.y * _MovingSpeed;
+                v.uv.x += _MovingSpeedX * _Time.x;
+                v.uv.y += _MovingSpeedZ * _Time.x;
                 float vertexrandpos = random(v.vertex.xz);
-                float4 worldVertexPos = mul(unity_ObjectToWorld, v.vertex);
-
-#if _AXIS_X
-                float waveHeight = sin(t + worldVertexPos.x * _Frequence) * _Amplitude;
-				waveHeight += cos(2*t + worldVertexPos.x * _Frequence) * _Amplitude;
-#elif _AXIS_Y
-                float waveHeight = sin(t + worldVertexPos.y * _Frequence) * _Amplitude;
-				waveHeight += cos(2*t + worldVertexPos.y * _Frequence) * _Amplitude;
-#elif _AXIS_Z
-                float waveHeight = sin(t + worldVertexPos.z * _Frequence) * _Amplitude;
-				waveHeight += cos(2*t + worldVertexPos.z * _Frequence) * _Amplitude;
-#endif
-
-				v.vertex.y += v.vertex.y > _VertexThreshold ? waveHeight + vertexrandpos * _Power : v.vertex.y;
+                float waveWeight = circle(frac(v.uv), .5 , _Radius, _Smooth) * _Power;
+                v.vertex.y = waveWeight + vertexrandpos * _Amplitude;
                 v.vertex.x += vertexrandpos * _SinTime.z / 10;
-                v.vertex.z += vertexrandpos * _SinTime.x / 10;
+                v.vertex.z += vertexrandpos * _SinTime.z / 10;
+
                 o.pos = UnityObjectToClipPos(v.vertex);
                 o.vertex = v.vertex;
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
