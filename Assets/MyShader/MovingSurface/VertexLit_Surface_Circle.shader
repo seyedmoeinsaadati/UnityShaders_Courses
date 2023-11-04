@@ -13,10 +13,12 @@
         _Power("Vertex Power", Range(0, 2)) = 1
         _Amplitude("Wave Amplitude", Float) = 1
 
-        _Smooth ("Smoothness", Range(0.0, 0.5)) = 0.01
-        _Radius ("Radius", Range(0.0, 0.5)) = 0.3
+        _Smooth ("Smoothness", Float) = 0.01
+        _Radius ("Radius", Float) = 0.3
         _MovingSpeedX("Moving Speed X", Float) = 0
         _MovingSpeedZ("Moving Spedd Y", Float) = 0
+        _CircleX("Circle X", Float) = 1
+        _CircleY("Circle Y", Float) = 1
                 
     }
     SubShader
@@ -65,6 +67,7 @@
             float _VertexThreshold;
             float _Power, _Amplitude, _Radius, _Smooth;
             float _MovingSpeedX, _MovingSpeedZ;
+            float _CircleX, _CircleY;
 
             v2g vert (appdata v)
             {
@@ -72,7 +75,7 @@
                 v.uv.x += _MovingSpeedX * _Time.x;
                 v.uv.y += _MovingSpeedZ * _Time.x;
                 float vertexrandpos = random(v.vertex.xz);
-                float waveWeight = circle(frac(v.uv), .5 , _Radius, _Smooth) * _Power;
+                float waveWeight = circle(frac(v.uv), float2(.5,.5),_CircleX,_CircleY, _Radius, _Smooth) * _Power;
                 v.vertex.y = waveWeight + vertexrandpos * _Amplitude;
                 v.vertex.x += vertexrandpos * _SinTime.z / 10;
                 v.vertex.z += vertexrandpos * _SinTime.z / 10;

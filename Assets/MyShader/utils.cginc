@@ -76,10 +76,13 @@ void rotate(float2 UV, float2 center, float angle,out float2 Out)
     Out = UV;
 }
 
-float circle (float2 p, float center, float radius, float smooth)
+float circle (float2 p, float center, float a, float b, float radius, float smooth)
 {
-    float c = length(p - center) - radius;
-    return smoothstep(c - smooth, c + smooth, radius);
+    float2 c = p - center;
+    c.x /= a;// length(p.x - center.x)/a - radius;
+    c.y /= b;// length(p.y - center.y)/b - radius;  
+    return 1.-smoothstep(radius-(radius*smooth), radius+(radius*0.01), dot(c,c)*4.0);
+    // return smoothstep(c - smooth, c + smooth, radius);
 }
 
 
