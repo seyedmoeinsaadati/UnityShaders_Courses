@@ -9,6 +9,7 @@
 
         [Space]
         _VertexThreshold("Vertex Thereshold", Float) = .0
+        _SurfaceOffset("Surface Offset", Float) = .0
 
         _Power("Vertex Power", Range(0, 2)) = 1
         _Amplitude("Wave Amplitude", Float) = 1
@@ -64,7 +65,7 @@
             sampler2D _MainTex;
             float4 _MainTex_ST;
 
-            float _VertexThreshold;
+            float _VertexThreshold, _SurfaceOffset;
             float _Power, _Amplitude, _Radius, _Smooth;
             float _MovingSpeedX, _MovingSpeedZ;
             float _CircleX, _CircleY;
@@ -76,7 +77,7 @@
                 v.uv.y += _MovingSpeedZ * _Time.x;
                 float vertexrandpos = random(v.vertex.xz);
                 float waveWeight = circle(frac(v.uv), float2(.5,.5),_CircleX,_CircleY, _Radius, _Smooth) * _Power;
-                v.vertex.y = waveWeight + vertexrandpos * _Amplitude;
+                v.vertex.y = v.vertex.y > _VertexThreshold ? _SurfaceOffset+  waveWeight + vertexrandpos * _Amplitude : v.vertex.y;
                 v.vertex.x += vertexrandpos * _SinTime.z / 10;
                 v.vertex.z += vertexrandpos * _SinTime.z / 10;
 

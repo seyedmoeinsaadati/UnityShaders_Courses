@@ -56,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Amplitude: 0.46
+    - _Amplitude: 0.58
     - _Axis: 2
     - _BumpScale: 1
     - _CircleX: 1
@@ -71,18 +71,19 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _MovingSpeed: 1
-    - _MovingSpeedX: 5
-    - _MovingSpeedZ: 10
+    - _MovingSpeedX: 1
+    - _MovingSpeedZ: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Power: 2
-    - _Radius: 0.38
-    - _Smooth: 2.24
+    - _Radius: 1
+    - _Smooth: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _SurfaceOffset: 5.91
     - _UVSec: 0
-    - _VertexThreshold: -0.28
+    - _VertexThreshold: -0.37
     - _WavePower: 0
     - _YThreshold: -1
     - _ZWrite: 1

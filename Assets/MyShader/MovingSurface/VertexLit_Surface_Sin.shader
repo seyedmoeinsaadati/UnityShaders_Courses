@@ -9,6 +9,7 @@
 
         [Space]
         _VertexThreshold("Vertex Thereshold", Float) = .0
+        _SurfaceOffset("Surface Offset", Float) = .0
 
         _Power("Vertex Amplitude", float) = 1
         _Amplitude("Wave Amplitude", Float) = 1
@@ -61,7 +62,7 @@
             sampler2D _MainTex;
             float4 _MainTex_ST;
 
-            float _VertexThreshold;
+            float _VertexThreshold, _SurfaceOffset;
             float _Power, _Amplitude, _Frequence;
             float _MovingSpeed;
 
@@ -69,9 +70,9 @@
             {
                 v2g o;
 
-	            float t = _Time.y * _MovingSpeed;
-                float vertexrandpos = random(v.vertex.xz);
+	            float t = _MovingSpeed * _Time.y;
                 float4 worldVertexPos = mul(unity_ObjectToWorld, v.vertex);
+                float vertexrandpos = random(worldVertexPos.xz + worldVertexPos.yx);
 
 #if _AXIS_X
                 float waveHeight = sin(t + worldVertexPos.x * _Frequence) * _Amplitude;
@@ -84,7 +85,7 @@
 				waveHeight += cos(2*t + worldVertexPos.z * _Frequence) * _Amplitude;
 #endif
 
-				v.vertex.y += v.vertex.y > _VertexThreshold ? waveHeight + vertexrandpos * _Power : v.vertex.y;
+				v.vertex.y += v.vertex.y > _VertexThreshold ? _SurfaceOffset + waveHeight + vertexrandpos * _Power : v.vertex.y;
                 v.vertex.x += vertexrandpos * _SinTime.z / 10;
                 v.vertex.z += vertexrandpos * _SinTime.x / 10;
                 o.pos = UnityObjectToClipPos(v.vertex);
