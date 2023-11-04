@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: VertexLit_NormalMoving
+  m_Name: VertexLit_Annihilation
   m_Shader: {fileID: 4800000, guid: a16aa1731155017438a97be0c0664f9f, type: 3}
   m_ShaderKeywords: _ADDITIONALTILE_NONE _AMBIENT_ON _REVERSE_ON
   m_LightmapFlags: 4
