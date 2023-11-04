@@ -28,6 +28,7 @@
             
             #include "UnityCG.cginc"
             #include "UnityLightingCommon.cginc" 
+            #include "Assets/MyShader/utils.cginc"
 
             #pragma vertex vert
             #pragma geometry geom
