@@ -28,7 +28,6 @@
             
             #include "UnityCG.cginc"
             #include "UnityLightingCommon.cginc" 
-            #include "Assets/MyShader/utils.cginc"
 
             #pragma vertex vert
             #pragma geometry geom
@@ -123,7 +122,7 @@
                 }
             }
 
-             half4 frag(g2f i) : COLOR
+            half4 frag(g2f i) : COLOR
             {
                 float4 col = tex2D(_MainTex, i.uv);
                 col.rgb *= i.light * _Color;

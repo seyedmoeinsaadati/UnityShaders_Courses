@@ -113,7 +113,7 @@
                 }
             }
 
-             half4 frag(g2f i) : COLOR
+            half4 frag(g2f i) : COLOR
             {
                 float4 col = tex2D(_MainTex, i.uv);
                 col.rgb *= i.light * _Color;
