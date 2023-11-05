@@ -42,7 +42,7 @@ Material:
     - _MovingSpeedZ2: 0
     - _MovingSpeedZ3: 0
     - _NormalFactor: 0
-    - _Radius: 0.347
+    - _Radius: 0
     - _Radius1: 0.3
     - _Radius2: 0.3
     - _Radius3: 0.3
@@ -50,12 +50,12 @@ Material:
     - _Smooth1: 0.01
     - _Smooth2: 0.01
     - _Smooth3: 0.01
-    - _WavePower: 1.56
+    - _WavePower: 0
     - _WavePower1: 1
     - _WavePower2: 1
     - _WavePower3: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.72979707, g: 0.74726033, b: 0.754717, a: 1}
     - _CustomLightColor: {r: 1, g: 0, b: 0, a: 1}
     - _CustomLightDir: {r: 0, g: 0, b: 0, a: 1}
     - _LColor: {r: 1, g: 0.4198113, b: 0.4198113, a: 1}

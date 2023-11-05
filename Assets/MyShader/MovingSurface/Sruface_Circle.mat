@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: simple_wave
-  m_Shader: {fileID: 4800000, guid: fe100f0f5f041b84f82140cc592bf5b3, type: 3}
-  m_ShaderKeywords: 
+  m_Name: Sruface_Circle
+  m_Shader: {fileID: 4800000, guid: 6236fc3796a58c3459543558335a22e9, type: 3}
+  m_ShaderKeywords: _AXIS_Z
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 6f5bc7251f5629546ba5b0afc537575f, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -56,26 +56,37 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Amp: 0.405
+    - _Amplitude: 0.58
+    - _Axis: 2
     - _BumpScale: 1
+    - _CircleX: 1
+    - _CircleY: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Freq: 3.75
+    - _Frequence: 0.5
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
+    - _MovingSpeed: 1
+    - _MovingSpeedX: 1
+    - _MovingSpeedZ: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _Power: 2
+    - _Radius: 1
+    - _Smooth: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed: 30
     - _SrcBlend: 1
+    - _SurfaceOffset: 5.91
     - _UVSec: 0
+    - _VertexThreshold: -0.37
+    - _WavePower: 0
+    - _YThreshold: -1
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Tint: {r: 1, g: 1, b: 1, a: 1}
