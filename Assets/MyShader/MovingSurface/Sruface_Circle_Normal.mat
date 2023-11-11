@@ -56,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Amplitude: 1.77
+    - _Amplitude: 0
     - _Axis: 2
     - _BumpScale: 1
     - _CircleX: 10
@@ -78,7 +78,7 @@ Material:
     - _Parallax: 0.02
     - _Power: 0.61
     - _Radius: 0.03
-    - _Smooth: 1.31
+    - _Smooth: 1.53
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
