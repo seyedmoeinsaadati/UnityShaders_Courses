@@ -8,7 +8,7 @@
         _Color ("Color", Color) = (1,1,1,1)
 
         [Space]
-        _VertexThreshold("Surface Thereshold (Y-Axis)", Float) = .0
+        _VertexThreshold("Vertex Thereshold", Float) = .0
         _SurfaceOffset("Surface Offset", Float) = .0
 
         _Power("Power (Vertex Amplitude)", float) = 1
