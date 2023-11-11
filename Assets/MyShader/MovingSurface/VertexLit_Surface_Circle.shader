@@ -8,10 +8,10 @@
         _Color ("Color", Color) = (1,1,1,1)
 
         [Space]
-        _VertexThreshold("Vertex Thereshold", Float) = .0
+        _VertexThreshold("Surface Thereshold (Y-Axis)", Float) = .0
         _SurfaceOffset("Surface Offset", Float) = .0
 
-        _Power("Vertex Power", Range(0, 2)) = 1
+        _Power("Power (Vertex Amplitude)", float) = 1
         _Amplitude("Wave Amplitude", Float) = 1
 
         _Smooth ("Smoothness", Float) = 0.01
@@ -20,6 +20,9 @@
         _MovingSpeedZ("Moving Spedd Y", Float) = 0
         _CircleX("Circle X", Float) = 1
         _CircleY("Circle Y", Float) = 1
+
+        [Toggle] _Normal("Along Normal Axis", Float) = 0
+        
                 
     }
     SubShader
@@ -37,7 +40,7 @@
             #pragma vertex vert
             #pragma geometry geom
             #pragma fragment frag
-            #pragma multi_compile _AXIS_X _AXIS_Y _AXIS_Z
+            #pragma multi_compile __ _NORMAL_ON
 
             struct appdata
             {
@@ -76,15 +79,23 @@
                 v.uv.x += _MovingSpeedX * _Time.x;
                 v.uv.y += _MovingSpeedZ * _Time.x;
                 float vertexrandpos = random(v.vertex.xz);
-                float waveWeight = circle(frac(v.uv), float2(.5,.5),_CircleX,_CircleY, _Radius, _Smooth) * _Power;
-                v.vertex.y = v.vertex.y > _VertexThreshold ? _SurfaceOffset+  waveWeight + vertexrandpos * _Amplitude : v.vertex.y;
+                float waveHeight = circle(frac(v.uv), float2(.5,.5),_CircleX,_CircleY, _Radius, _Smooth) * _Power;
+
+ #if _NORMAL_ON
+                // v.normal = normalize(float3(v.normal.x + waveHeight, v.normal.y, v.normal.z));
+                v.vertex.xyz += v.normal * (waveHeight);
+ 				v.vertex.y += v.vertex.y > _VertexThreshold ? v.normal.y * (waveHeight * _Power) : v.vertex.y;
+                v.vertex.x += v.vertex.y > _VertexThreshold ? v.normal.x * (waveHeight * _Power) : v.vertex.x;
+                v.vertex.z += v.vertex.y > _VertexThreshold ? v.normal.z * (waveHeight * _Power) : v.vertex.z;
+ #else
+				v.vertex.y = v.vertex.y > _VertexThreshold ? _SurfaceOffset + waveHeight + vertexrandpos * _Amplitude : v.vertex.y;
                 v.vertex.x += vertexrandpos * _SinTime.z / 10;
                 v.vertex.z += vertexrandpos * _SinTime.z / 10;
+ #endif
 
                 o.pos = UnityObjectToClipPos(v.vertex);
                 o.vertex = v.vertex;
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                // v.normal = normalize(float3(v.normal.x + waveHeight, v.normal.y, v.normal.z));
 
                 return o;
             }

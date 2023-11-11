@@ -8,15 +8,17 @@
         _Color ("Color", Color) = (1,1,1,1)
 
         [Space]
-        _VertexThreshold("Vertex Thereshold", Float) = .0
+        _VertexThreshold("Surface Thereshold (Y-Axis)", Float) = .0
         _SurfaceOffset("Surface Offset", Float) = .0
 
-        _Power("Vertex Amplitude", float) = 1
+        _Power("Power (Vertex Amplitude)", float) = 1
         _Amplitude("Wave Amplitude", Float) = 1
         _Frequence("Wave Frequence", Float) = 1
 
         [KeywordEnum(X, Y, Z)] _Axis("Moving Axis", Float) = 1  
         _MovingSpeed("Moving Speed", Float) = 0
+
+        [Toggle] _Normal("Along Normal Axis", Float) = 0
                 
     }
     SubShader
@@ -35,6 +37,7 @@
             #pragma geometry geom
             #pragma fragment frag
             #pragma multi_compile _AXIS_X _AXIS_Y _AXIS_Z
+            #pragma multi_compile __ _NORMAL_ON
 
             struct appdata
             {
@@ -85,13 +88,22 @@
 				waveHeight += cos(2*t + worldVertexPos.z * _Frequence) * _Amplitude;
 #endif
 
+#if _NORMAL_ON
+                v.normal = normalize(float3(v.normal.x + waveHeight, v.normal.y, v.normal.z));
+                v.vertex.xyz += v.normal * (waveHeight);
+ 				v.vertex.y += v.normal.y * (waveHeight * _Power);
+                v.vertex.x += v.normal.x * (waveHeight * _Power);
+                v.vertex.z += v.normal.z * (waveHeight * _Power);
+ #else
 				v.vertex.y += v.vertex.y > _VertexThreshold ? _SurfaceOffset + waveHeight + vertexrandpos * _Power : v.vertex.y;
                 v.vertex.x += vertexrandpos * _SinTime.z / 10;
                 v.vertex.z += vertexrandpos * _SinTime.x / 10;
+
+ #endif
                 o.pos = UnityObjectToClipPos(v.vertex);
                 o.vertex = v.vertex;
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                // v.normal = normalize(float3(v.normal.x + waveHeight, v.normal.y, v.normal.z));
+                
 
                 return o;
             }
