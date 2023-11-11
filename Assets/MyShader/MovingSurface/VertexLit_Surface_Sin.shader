@@ -15,7 +15,7 @@
         _Amplitude("Wave Amplitude", Float) = 1
         _Frequence("Wave Frequence", Float) = 1
 
-        [KeywordEnum(X, Y, Z)] _Axis("Moving Axis", Float) = 1  
+        [KeywordEnum(X, Y, Z, World)] _Axis("Moving Axis", Float) = 1  
         _MovingSpeed("Moving Speed", Float) = 0
 
         [Toggle] _Normal("Along Normal Axis", Float) = 0
@@ -36,7 +36,7 @@
             #pragma vertex vert
             #pragma geometry geom
             #pragma fragment frag
-            #pragma multi_compile _AXIS_X _AXIS_Y _AXIS_Z
+            #pragma multi_compile _AXIS_X _AXIS_Y _AXIS_Z _AXIS_WORLD
             #pragma multi_compile __ _NORMAL_ON
 
             struct appdata
@@ -86,14 +86,16 @@
 #elif _AXIS_Z
                 float waveHeight = sin(t + worldVertexPos.z * _Frequence) * _Amplitude;
 				waveHeight += cos(2*t + worldVertexPos.z * _Frequence) * _Amplitude;
+#elif _AXIS_WORLD
+                float waveHeight = sin(t + v.vertex.x * _Frequence) * _Amplitude;
+				waveHeight += cos(2*t + v.vertex.x * _Frequence) * _Amplitude;
 #endif
 
 #if _NORMAL_ON
-                v.normal = normalize(float3(v.normal.x + waveHeight, v.normal.y, v.normal.z));
                 v.vertex.xyz += v.normal * (waveHeight);
- 				v.vertex.y += v.normal.y * (waveHeight * _Power);
-                v.vertex.x += v.normal.x * (waveHeight * _Power);
-                v.vertex.z += v.normal.z * (waveHeight * _Power);
+ 				v.vertex.y += v.normal.y * (waveHeight + vertexrandpos * _Power);
+                v.vertex.x += v.normal.x * (waveHeight + vertexrandpos * _Power);
+                v.vertex.z += v.normal.z * (waveHeight + vertexrandpos * _Power);
  #else
 				v.vertex.y += v.vertex.y > _VertexThreshold ? _SurfaceOffset + waveHeight + vertexrandpos * _Power : v.vertex.y;
                 v.vertex.x += vertexrandpos * _SinTime.z / 10;

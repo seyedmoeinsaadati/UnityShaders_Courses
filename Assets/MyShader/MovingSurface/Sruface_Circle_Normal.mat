@@ -76,8 +76,8 @@ Material:
     - _Normal: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Power: 0.1
-    - _Radius: 0.09
+    - _Power: 0.61
+    - _Radius: 0.03
     - _Smooth: 1.31
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
