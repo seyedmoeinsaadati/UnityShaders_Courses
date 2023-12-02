@@ -57,7 +57,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Ambient: 1
-    - _Amount: 0
+    - _Amount: 1.95
     - _BumpScale: 1
     - _CameraOffset: 0.05
     - _Cutoff: 0.5
@@ -73,7 +73,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Radius: 0
+    - _Radius: 4.53
     - _Reverse: 0
     - _Rim: 0
     - _RimInt: 1

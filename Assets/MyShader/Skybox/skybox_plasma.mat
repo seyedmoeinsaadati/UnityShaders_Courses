@@ -69,7 +69,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Exposure: 1
+    - _Exposure: 1.24
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -84,14 +84,14 @@ Material:
     - _OffsetX: 0.51
     - _OffsetY: 0
     - _Parallax: 0.02
-    - _PlasmaScale0: 0.12
+    - _PlasmaScale0: 1
     - _PlasmaScale1: 0
     - _PlasmaScale2: 0
     - _PlasmaScale3: 10
     - _PlasmaScale4: 300
-    - _PlasmaSpeed: 1
+    - _PlasmaSpeed: 5
     - _PlasmaToggle: 0
-    - _PlasmaWieght: 0.284
+    - _PlasmaWieght: 0.1
     - _Radius: 45.4
     - _Rotation: 0
     - _Smooth: 0.01
@@ -108,4 +108,4 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Tiling: {r: 0.1, g: 200, b: 0, a: 0}
-    - _Tint: {r: 1, g: 1, b: 1, a: 1}
+    - _Tint: {r: 0.764151, g: 0.764151, b: 0.764151, a: 1}
