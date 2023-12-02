@@ -59,8 +59,8 @@ Material:
     - _Amplitude: 0
     - _Axis: 2
     - _BumpScale: 1
-    - _CircleX: 10
-    - _CircleY: 1
+    - _CircleX: 35.34
+    - _CircleY: 1.39
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -77,7 +77,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Power: 0.61
-    - _Radius: 0.03
+    - _Radius: 0.01
     - _Smooth: 1.53
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1

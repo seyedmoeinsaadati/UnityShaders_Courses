@@ -1,14 +1,10 @@
-﻿Shader "Moein/Skybox/Plasma" {
+﻿Shader "Moein/Skybox/Vertex_Plasma" {
 Properties {
 
-    [NoScaleOffset] _Texture1 ("Texture 1", 2D) = "grey" {}
-
+    [NoScaleOffset] _MainTex ("Texture", 2D) = "grey" {}
     [Gamma] _Exposure ("Exposure", Range(0, 8)) = 1.0
     _Tint ("Tint Color", Color) = (.5, .5, .5, .5)
     _Rotation ("Rotation", Range(0, 360)) = 0
-
-    _SpeedU("Speed U", float ) = 0
-    _SpeedV("Speed V", float ) = 0
 
     [Space(20)]
     [Header(Plasma Fields)]
@@ -36,9 +32,9 @@ SubShader {
 
         #include "UnityCG.cginc"
 
-        sampler2D _Texture1;
-        float4 _Texture1_TexelSize;
-        half4 _Texture1_HDR;
+        sampler2D _MainTex;
+        float4 _MainTex_TexelSize;
+        half4 _MainTex_HDR;
 
         half4 _Tint;
         half _Exposure;
@@ -112,8 +108,6 @@ SubShader {
             float t = _Time.x * _PlasmaSpeed;
             float plasmaValue = abs(plasma(v.vertex.xy, t, _PlasmaScale1, _PlasmaScale2, _PlasmaScale3, _PlasmaScale4));
             o.texcoord.xy += plasmaValue * _PlasmaScale0 * _PlasmaWieght;
-            o.texcoord.x += _SpeedU * _Time.x;
-            o.texcoord.y += _SpeedV * _Time.x;
        
             return o;
         }
@@ -122,7 +116,7 @@ SubShader {
         {
             float2 tc = ToRadialCoords(i.texcoord);
             
-            half3 col1 = tex2D(_Texture1, tc).rgb * _Tint.rgb * unity_ColorSpaceDouble.rgb * _Exposure;
+            half3 col1 = tex2D(_MainTex, tc).rgb * _Tint.rgb * unity_ColorSpaceDouble.rgb * _Exposure;
             return half4(col1, 1);
         }
         ENDCG
