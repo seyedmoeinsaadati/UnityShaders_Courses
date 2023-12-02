@@ -22,7 +22,7 @@ public class CameraEffect : MonoBehaviour
         if (autoUpdate)
         {
             Graphics.Blit(source, destination, material);
-        }        
+        }
     }
 
 }

@@ -65,7 +65,7 @@ Material:
     - _ColorInvert: 0
     - _ColorMode: 1
     - _ColorModifier: 0
-    - _ColorOffset: 1
+    - _ColorOffset: 0
     - _ColorToggle: 1
     - _ContrastIntensity: 0
     - _ContrastToggle: 1
