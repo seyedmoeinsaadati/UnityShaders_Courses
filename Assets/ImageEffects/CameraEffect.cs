@@ -5,7 +5,6 @@
 #endif
 public class CameraEffect : MonoBehaviour
 {
-
     public bool autoUpdate;
     public Material material;
 
