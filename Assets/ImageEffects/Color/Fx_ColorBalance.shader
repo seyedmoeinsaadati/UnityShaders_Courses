@@ -6,18 +6,30 @@
         _MainTex ("Texture", 2D) = "white" {}
 
         _Brightness("Brightness", Range(0, 2)) = 1
+        [Space(10)]
+        _GreyscaleIntensity("Grayscale", Range(0, 1)) = 0
+        [Space(10)]
+        _ColorModifier("Color Modifier (*)", Range(0, 1)) = 0  
         [Space(5)]
-        [Toggle] _ColorToggle("Color", Float) = 0
-        [KeywordEnum(Off, Add, Multiply)] _ColorMode("Mode", Float) = 1        
+        _RModifier("Red", Range(0, 1)) = 0
+        _GModifier("Green", Range(0, 1)) = 0
+        _BModifier("Blue", Range(0, 1)) = 0
+        [Space(10)]
+        _ColorOffset("Color Offset (+)", Range(0, 1)) = 0 
+        [Space(5)]
         _ROffset("Red", Range(0, 1)) = 0
         _GOffset("Green", Range(0, 1)) = 0
         _BOffset("Blue", Range(0, 1)) = 0
+        [Space(10)]
+        _ContrastIntensity("Contrast", Range(0, 1)) = 0
         [Space(5)]
-        [Toggle] _GrayScaleToggle("Grayscale", Float) = 0
-        [Space(5)]
-        [Toggle] _ContrastToggle("Contrast", Float) = 0
-        _MinContrast("Min", Range(0, 1)) = 0
-        _MaxContrast("Max", Range(0, 1)) = 1
+        _RedMinContrast("Red - Min", Range(0, 1)) = 0
+        _RedMaxContrast("Red - Max", Range(0, 1)) = 1
+        _GreenMinContrast("Green - Min", Range(0, 1)) = 0
+        _GreenMaxContrast("Green - Max", Range(0, 1)) = 1
+        _BlueMinContrast("Blue - Min", Range(0, 1)) = 0
+        _BlueMaxContrast("Blue - Max", Range(0, 1)) = 1
+        _ColorInvert("Invert", Range(0, 1)) = 0
     }
 
     SubShader
@@ -30,10 +42,6 @@
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            #pragma multi_compile _COLORMODE_OFF _COLORMODE_ADD _COLORMODE_MULTIPLY
-            #pragma multi_compile __ _COLORTOGGLE_ON
-            #pragma multi_compile __ _CONTRASTTOGGLE_ON
-            #pragma multi_compile __ _GRAYSCALETOGGLE_ON
             
             #include "UnityCG.cginc"
 
@@ -63,40 +71,48 @@
 
             sampler2D _MainTex;
 
-            // color
-            float _ROffset;
-            float _GOffset;
-            float _BOffset;
+            // Color Modifer
+            half _ColorModifier;
+            half _RModifier;
+            half _GModifier;
+            half _BModifier;
+
+            // Color Offset
+            half _ColorOffset;
+            half _ROffset;
+            half _GOffset;
+            half _BOffset;
+
+            half _GreyscaleIntensity;
 
             // contrast
-            float _MinContrast;
-            float _MaxContrast;
+            half _ContrastIntensity;
+            half _RedMinContrast;
+            half _RedMaxContrast;
+            half _GreenMinContrast;
+            half _GreenMaxContrast;
+            half _BlueMinContrast;
+            half _BlueMaxContrast;
 
-            float _Brightness;
+            half _Brightness, _ColorInvert;
 
             fixed4 frag (v2f i) : SV_Target
             {
                 fixed4 col = tex2D(_MainTex, i.uv);
 
-#if _COLORTOGGLE_ON && (_COLORMODE_ADD || _COLORMODE_MULTIPLY)
-#if _COLORMODE_ADD
-                col.r *= 1 + _ROffset;
-                col.g *= 1 + _GOffset;
-                col.b *= 1 + _BOffset;
-#else
-                col.r *= _ROffset;
-                col.g *= _GOffset;
-                col.b *= _BOffset;
-#endif
-#endif
+                float3 tempColor = float3(1 + _ROffset, 1 + _GOffset, 1 + _BOffset) * col.rgb;
+                col.rgb = lerp(col, tempColor, _ColorOffset);
 
-#if _GRAYSCALETOGGLE_ON
-                col = col.r * .299 + col.g * .587 + col.b * .114;
-#endif
+                tempColor = float3(_RModifier,_GModifier, _BModifier) * col.rgb;
+                col.rgb = lerp(col, tempColor, _ColorModifier);
 
-#if _CONTRASTTOGGLE_ON
-                col.rgb = invLerp(float3(_MinContrast,_MinContrast,_MinContrast), float3(_MaxContrast,_MaxContrast,_MaxContrast), col.rgb);
-#endif
+                tempColor = col.r * .299 + col.g * .587 + col.b * .114;
+                col.rgb = lerp(col, tempColor, _GreyscaleIntensity);
+
+                tempColor = invLerp(float3(_RedMinContrast,_GreenMinContrast,_BlueMinContrast), float3(_RedMaxContrast,_GreenMaxContrast,_BlueMaxContrast), col.rgb);
+                col.rgb = lerp(col.rgb, tempColor, _ContrastIntensity);
+                
+                col.rgb = lerp(col, 1- col, _ColorInvert); 
 
                 col *= _Brightness;
                 return col;

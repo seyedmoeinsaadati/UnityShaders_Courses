@@ -65,6 +65,7 @@ Material:
     - _ColorMode: 1
     - _ColorToggle: 1
     - _Color_Toggle: 1
+    - _ContrastIntensity: 0
     - _ContrastToggle: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -79,6 +80,7 @@ Material:
     - _Grayscale_Red: 0.389
     - _GreenMaxContrast: 1
     - _GreenMinContrast: 0
+    - _GreyscaleIntensity: 0
     - _MaxContrast: 1
     - _Metallic: 0
     - _MinContrast: 0

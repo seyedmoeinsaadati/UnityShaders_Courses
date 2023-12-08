@@ -25,10 +25,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Ambient: 1
-    - _AmbientInt: 1
+    - _AmbientInt: 0.537
     - _LightInt: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _LightColorX: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 1}
-    - _LightColorY: {r: 1, g: 1, b: 1, a: 1}
-    - _LightColorZ: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
+    - _LightColorX: {r: 0.6603774, g: 0.31461376, b: 0.31461376, a: 1}
+    - _LightColorY: {r: 0.4811321, g: 0.12028302, b: 0.12028302, a: 1}
+    - _LightColorZ: {r: 0.9245283, g: 0, b: 0, a: 1}

@@ -5,7 +5,6 @@
 #endif
 public class CameraEffect : MonoBehaviour
 {
-
     public bool autoUpdate;
     public Material material;
 
@@ -23,7 +22,7 @@ public class CameraEffect : MonoBehaviour
         if (autoUpdate)
         {
             Graphics.Blit(source, destination, material);
-        }        
+        }
     }
 
 }
