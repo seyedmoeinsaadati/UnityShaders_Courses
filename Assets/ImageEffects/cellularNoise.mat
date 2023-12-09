@@ -68,21 +68,23 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _Rotate: 180
     - _SCaleY: 1
     - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _Speed: 10
     - _SrcBlend: 1
+    - _TextureAlpha: 0
     - _Tiling: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GradientColorBottom: {r: 0.035294153, g: 0.2, b: 0, a: 0}
-    - _GradientColorLeft: {r: 0, g: 0.2, b: 0.19607845, a: 0}
-    - _GradientColorRight: {r: 0.1968628, g: 0, b: 0.2, a: 0}
-    - _GradientColorTop: {r: 0.2, g: 0, b: 0, a: 0}
-    - _Tiling: {r: 10, g: 10, b: 0, a: 0}
-    - _TintColor: {r: 0.107083485, g: 0, b: 0.14150941, a: 0}
+    - _GradientColorBottom: {r: 0, g: 0, b: 0, a: 0}
+    - _GradientColorLeft: {r: 0.3, g: 0.032941177, b: 0.032941177, a: 0}
+    - _GradientColorRight: {r: 0, g: 0, b: 0, a: 0}
+    - _GradientColorTop: {r: 0, g: 0, b: 0, a: 0}
+    - _Tiling: {r: 0, g: 15, b: 0, a: 0}
+    - _TintColor: {r: 0.75, g: 0, b: 1, a: 0}

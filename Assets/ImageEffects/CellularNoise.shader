@@ -9,11 +9,12 @@
         _Chaos("Chaos", Float) = 10
         _Speed("Speed", Float) = 10
         _Smoothness("Smoothness", Range(0, 2)) = 1
-        
+
         _GradientColorTop("Color Top", Color) = (0,0,0,0)
         _GradientColorBottom("Color Bottom", Color) = (0,0,0,0)
         _GradientColorRight("Color Right", Color) = (0,0,0,0)
         _GradientColorLeft("Color Left", Color) = (0,0,0,0)
+        _Rotate("Rotation", Range(0, 360)) = 0
     }
     SubShader
     {
@@ -27,6 +28,7 @@
             #pragma fragment frag
 
             #include "UnityCG.cginc"
+            #include "Assets/MyShader/utils.cginc"
 
             struct appdata
             {
@@ -42,7 +44,7 @@
 
             sampler2D _MainTex;
             half4 _Tiling;
-            float _Chaos, _Speed, _Smoothness, _TextureAlpha;
+            float _Chaos, _Speed, _Smoothness, _TextureAlpha, _Rotate;
 
             float4 _GradientColorTop;
             float4 _GradientColorBottom;
@@ -57,16 +59,17 @@
                 return o;
             }
 
-            float2 random(float2 p ) {
-                return frac(sin(float2(dot(p,float2(127.1,311.7)),dot(p,float2(269.5,183.3))))*43758.5453);
-            }
+            // float2 random(float2 p ) {
+            //     return frac(sin(float2(dot(p,float2(127.1,311.7)),dot(p,float2(269.5,183.3))))*43758.5453);
+            // }
             
             fixed4 frag (v2f i) : SV_Target
             {
                 fixed4 color = (tex2D(_MainTex, frac(i.uv)) * _TextureAlpha);
-
-                fixed4 tintColor = lerp(_GradientColorBottom, _GradientColorTop, i.uv.y);
-                tintColor += lerp(_GradientColorLeft, _GradientColorRight, i.uv.x);
+                float2 rotatedUv;
+                rotate(i.uv, float2(.5,.5), _Rotate, rotatedUv);
+                fixed4 tintColor = lerp(_GradientColorBottom, _GradientColorTop, rotatedUv.x);
+                tintColor += lerp(_GradientColorLeft, _GradientColorRight, rotatedUv.y);
 
                 i.uv *= _Tiling.xy;
                 i.uv += _Tiling.zw;
