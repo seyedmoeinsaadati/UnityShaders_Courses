@@ -3,18 +3,17 @@
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _TintColor("Tint", Color) = (0,0,0,0)
+        _TextureAlpha("Texture Alpha", Float) = 0
+
         _Tiling ("Tiling (Scale: XY, Offset: ZW)", Vector) = (1,1,0,0)
         _Chaos("Chaos", Float) = 10
         _Speed("Speed", Float) = 10
-
         _Smoothness("Smoothness", Range(0, 2)) = 1
         
         _GradientColorTop("Color Top", Color) = (0,0,0,0)
         _GradientColorBottom("Color Bottom", Color) = (0,0,0,0)
         _GradientColorRight("Color Right", Color) = (0,0,0,0)
         _GradientColorLeft("Color Left", Color) = (0,0,0,0)
-    
     }
     SubShader
     {
@@ -42,9 +41,8 @@
             };
 
             sampler2D _MainTex;
-            float4 _TintColor;
             half4 _Tiling;
-            float _Chaos, _Speed, _Smoothness;
+            float _Chaos, _Speed, _Smoothness, _TextureAlpha;
 
             float4 _GradientColorTop;
             float4 _GradientColorBottom;
@@ -65,8 +63,7 @@
             
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed4 color = 0;
-                color += (tex2D(_MainTex, frac(i.uv)) * _TintColor.a);
+                fixed4 color = (tex2D(_MainTex, frac(i.uv)) * _TextureAlpha);
 
                 fixed4 tintColor = lerp(_GradientColorBottom, _GradientColorTop, i.uv.y);
                 tintColor += lerp(_GradientColorLeft, _GradientColorRight, i.uv.x);
