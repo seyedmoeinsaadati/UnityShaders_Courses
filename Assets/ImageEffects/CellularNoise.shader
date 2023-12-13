@@ -15,6 +15,7 @@
         _GradientColorRight("Color Right", Color) = (0,0,0,0)
         _GradientColorLeft("Color Left", Color) = (0,0,0,0)
         _Rotate("Rotation", Range(0, 360)) = 0
+        _ColorIntensity("Color Intensity", Float) = 0
     }
     SubShader
     {
@@ -44,7 +45,7 @@
 
             sampler2D _MainTex;
             half4 _Tiling;
-            float _Chaos, _Speed, _Smoothness, _TextureAlpha, _Rotate;
+            float _Chaos, _Speed, _Smoothness, _TextureAlpha, _Rotate, _ColorIntensity;
 
             float4 _GradientColorTop;
             float4 _GradientColorBottom;
@@ -59,13 +60,11 @@
                 return o;
             }
 
-            // float2 random(float2 p ) {
-            //     return frac(sin(float2(dot(p,float2(127.1,311.7)),dot(p,float2(269.5,183.3))))*43758.5453);
-            // }
-            
             fixed4 frag (v2f i) : SV_Target
             {
                 fixed4 color = (tex2D(_MainTex, frac(i.uv)) * _TextureAlpha);
+                color += _ColorIntensity;
+
                 float2 rotatedUv;
                 rotate(i.uv, float2(.5,.5), _Rotate, rotatedUv);
                 fixed4 tintColor = lerp(_GradientColorBottom, _GradientColorTop, rotatedUv.x);
@@ -114,7 +113,6 @@
 
                 // Show isolines
                 // color -= step(.7,abs(sin(27.0*m_dist)))*.5;
-
                 return color;
             }
              
