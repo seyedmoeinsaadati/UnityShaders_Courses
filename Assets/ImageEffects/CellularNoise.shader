@@ -3,19 +3,18 @@
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _TextureAlpha("Texture Alpha", Float) = 0
-
+        _TextureIntensity("Texture Intensity", Float) = 0
         _Tiling ("Tiling (Scale: XY, Offset: ZW)", Vector) = (1,1,0,0)
+
         _Chaos("Chaos", Float) = 10
         _Speed("Speed", Float) = 10
         _Smoothness("Smoothness", Range(0, 2)) = 1
+        _Rotate("Rotation", Range(0, 360)) = 0
 
         _GradientColorTop("Color Top", Color) = (0,0,0,0)
         _GradientColorBottom("Color Bottom", Color) = (0,0,0,0)
         _GradientColorRight("Color Right", Color) = (0,0,0,0)
         _GradientColorLeft("Color Left", Color) = (0,0,0,0)
-        _Rotate("Rotation", Range(0, 360)) = 0
-        _ColorIntensity("Color Intensity", Float) = 0
     }
     SubShader
     {
@@ -45,7 +44,7 @@
 
             sampler2D _MainTex;
             half4 _Tiling;
-            float _Chaos, _Speed, _Smoothness, _TextureAlpha, _Rotate, _ColorIntensity;
+            float _Chaos, _Speed, _Smoothness, _Rotate, _TextureIntensity;
 
             float4 _GradientColorTop;
             float4 _GradientColorBottom;
@@ -62,8 +61,7 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed4 color = (tex2D(_MainTex, frac(i.uv)) * _TextureAlpha);
-                color += _ColorIntensity;
+                fixed4 color =  tex2D(_MainTex, frac(i.uv)) * _TextureIntensity;
 
                 float2 rotatedUv;
                 rotate(i.uv, float2(.5,.5), _Rotate, rotatedUv);
