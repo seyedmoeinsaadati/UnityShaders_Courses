@@ -24,7 +24,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _KernelSize: 5
+    - _KernelSize: 9
     m_Colors:
     - _BlueVector: {r: 0.189, g: 0.168, b: 0.131, a: 0}
     - _GreenVector: {r: 0.769, g: 0.686, b: 0.534, a: 0}
