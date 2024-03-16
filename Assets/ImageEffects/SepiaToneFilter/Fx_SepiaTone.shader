@@ -1,9 +1,13 @@
-﻿Shader "Hidden/First_Look"
+﻿Shader "Moein/ImageEffect/SepiaTone"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
+         _MainTex ("Texture", 2D) = "white" {}
+         _RedVector("Red", Vector) = (0.393, 0.349, 0.272,0)
+         _GreenVector("Red", Vector) = (0.769, 0.686, 0.534,0)
+         _BlueVector("Red", Vector) = (0.189, 0.168, 0.131, 0)
     }
+
     SubShader
     {
         // No culling or depth
@@ -13,14 +17,14 @@
         {
             CGPROGRAM
             #pragma vertex vert
-            #pragma fragment frag
-
+            #pragma fragment frag         
+            
             #include "UnityCG.cginc"
 
             struct appdata
             {
-                float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
+                float4 vertex : POSITION;
             };
 
             struct v2f
@@ -39,12 +43,22 @@
 
             sampler2D _MainTex;
 
+            half3 _RedVector, _GreenVector, _BlueVector;
+
             fixed4 frag (v2f i) : SV_Target
             {
                 fixed4 col = tex2D(_MainTex, i.uv);
-                // just invert the colors
-                col.rgb = 1 - col.rgb;
-                return col;
+
+                half3x3 sepiaVals = half3x3
+                (
+                    _RedVector.rgb,
+                    _GreenVector.rgb,
+                    _BlueVector.rgb
+                );
+
+                fixed3 sepiaResult = mul(col.rgb, sepiaVals);
+
+                return fixed4(sepiaResult,1.0);
             }
             ENDCG
         }
