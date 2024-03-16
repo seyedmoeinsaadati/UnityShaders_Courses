@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SepiaTone
-  m_Shader: {fileID: 4800000, guid: b51d1f335c23ee34e8bab55a65d55027, type: 3}
+  m_Name: Silhouette
+  m_Shader: {fileID: 4800000, guid: 7f3c283e67222474aa1845c83aba2b11, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -26,5 +26,7 @@ Material:
     m_Floats: []
     m_Colors:
     - _BlueVector: {r: 0.189, g: 0.168, b: 0.131, a: 0}
+    - _FarColour: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 1}
     - _GreenVector: {r: 0.769, g: 0.686, b: 0.534, a: 0}
+    - _NearColour: {r: 0.15414643, g: 0.46226418, b: 0, a: 1}
     - _RedVector: {r: 0.393, g: 0.349, b: 0.272, a: 0}
