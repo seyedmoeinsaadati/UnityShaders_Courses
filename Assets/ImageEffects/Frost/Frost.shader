@@ -1,4 +1,4 @@
-Shader "Moine/Image Effects/Frost"
+Shader "Moine/Image Effects/MaskFrost"
 {
 	Properties {
 		[HideInInspector] _MainTex("Base (RGB)", 2D) = "white" {}
@@ -12,7 +12,12 @@ Shader "Moine/Image Effects/Frost"
 		_Smooth("Refraction Smoothness", Range(0.0, 1.0)) = 1.0
 		
 		_Color("Color", Color) = (1, 1, 1, 1)
-		_Speed("UV Speed", Float) = 1
+		// _Speed("UV Speed", Float) = 1
+
+		[Space]
+		[Toggle] _MaskToggle("Circle Mask", Float) = 0
+		_MaskIntensity("Mask Intensity", Range(0, .5)) = 1
+		_MaskSmoothness("Mask Smoothness", Range(0, 1)) = 1
 	}
 	
 	SubShader {
@@ -25,7 +30,8 @@ Shader "Moine/Image Effects/Frost"
 			#pragma vertex vert
 			#pragma fragment frag
 			#pragma fragmentoption ARB_precision_hint_fastest
-			
+			#pragma multi_compile __ _MASKTOGGLE_ON
+
 			#include "UnityCG.cginc"
 
 			sampler2D	_MainTex;
@@ -34,8 +40,11 @@ Shader "Moine/Image Effects/Frost"
 			sampler2D	_BumpTex;
 			sampler2D	_CoverageTex;
 			
-			fixed _Transparency, _Refraction, _Coverage, _Smooth, _Speed;
+			fixed _Transparency, _Refraction, _Coverage, _Smooth;
 			fixed4 _Color;
+
+			half _MaskIntensity, _MaskSmoothness;
+
 			
 			struct appdata
 			{
@@ -48,6 +57,12 @@ Shader "Moine/Image Effects/Frost"
 				float4	pos : SV_POSITION;
 				half2	uv[2] : TEXCOORD0;
 			};
+
+			float circle(float2 p, float center, float radius, float smoothIn, float smoothOut)
+			{
+				float c = length(p - center) - radius;
+				return smoothstep(c - smoothOut, c + smoothIn, radius);
+			}
 
 			v2f vert(appdata v)
 			{
@@ -77,14 +92,21 @@ Shader "Moine/Image Effects/Frost"
 				coverage = saturate(coverage / _Smooth);
 				
 				//Refraction
+				half3 screenPure = tex2D(_MainTex, i.uv[0]).rgb;
 				half3 screen = tex2D(_MainTex, i.uv[0] + normal * _Refraction * coverage).rgb;
 				
 				// Screen Blend Mode
-				half3 blendScreen = screen;(1.0 - ((1.0 - screen) * (1.0 - diffuse.rgb)));
+				half3 blendScreen = (1.0 - ((1.0 - screen) * (1.0 - diffuse.rgb)));
 				blendScreen = lerp(blendScreen, diffuse.rgb, _Color.a);
 				
 				fixed4 color = fixed4(1, 1, 1, 1);
 				color.rgb = lerp(screen, blendScreen, coverage * transparency);
+				
+#if _MASKTOGGLE_ON
+				half mask = 1-circle(i.uv[0], 0.5, _MaskIntensity, _MaskSmoothness, 0);
+				color.rgb = lerp(screenPure, color.rgb * mask, mask);
+#endif
+
 				return color;
 			}
 			
