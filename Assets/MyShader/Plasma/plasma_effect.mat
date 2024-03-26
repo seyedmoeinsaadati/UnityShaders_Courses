@@ -27,11 +27,11 @@ Material:
     - _Ambient: 1
     - _AmbientInt: 0.803
     - _LightInt: 1
-    - _Scale1: 0
-    - _Scale2: 0
-    - _Scale3: 0
-    - _Scale4: 0
-    - _Speed: 10
+    - _Scale1: 35
+    - _Scale2: 35
+    - _Scale3: 35
+    - _Scale4: 35
+    - _Speed: 99.5
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _LightColorX: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 1}

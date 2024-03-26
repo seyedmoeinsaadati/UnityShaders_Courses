@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MaskFrost
-  m_Shader: {fileID: 4800000, guid: 61b7d033f80fb90449e87a401d087c58, type: 3}
+  m_Name: ScreenBroken
+  m_Shader: {fileID: 4800000, guid: e0a0b0af7b23bab4ab2206f36bab6444, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -24,8 +24,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpTex:
-        m_Texture: {fileID: 2800000, guid: f0bfe9a41dd793d41b6d7420be3a8818, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 9c011faa949380e4e9795fa6529f482a, type: 3}
+        m_Scale: {x: 5, y: 5}
         m_Offset: {x: 0, y: 0}
     - _CoverageTex:
         m_Texture: {fileID: 0}
@@ -44,7 +44,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DiffuseTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: c0b2d8f4f38424546940fa49844b910c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DirectionMap:
+        m_Texture: {fileID: 2800000, guid: 97e61bb7f59a8c544b4d0a790a6c4050, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -74,8 +78,9 @@ Material:
     m_Floats:
     - _Blue: 0
     - _Blur: 1.54
+    - _Broken: 0.872
     - _BumpScale: 1
-    - _Coverage: 1
+    - _Coverage: 0.328
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -90,14 +95,16 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Refraction: 0.41
-    - _Smooth: 1
+    - _Refraction: 0
+    - _Smooth: 0
     - _Smoothness: 0.3
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _Speed: 5
+    - _SpeedX: 1
+    - _SpeedY: 0
     - _SrcBlend: 1
-    - _Transparency: 1
+    - _Transparency: 0.35
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
